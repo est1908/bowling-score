@@ -5,6 +5,8 @@
   
       // Use ES2015 module system
       "module": "es2015",
+
+      "target": "es5",
   
       // Set React as the JSX factory
       "jsx": "react",

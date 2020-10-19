@@ -1,4 +1,9 @@
 
+# Project structure
+
+- Domain
+Isolated app logic,
+
 
 # TODO:
 - prettier 
@@ -6,6 +11,7 @@
 - css animatiomns 
 - bowling good background -> 
 - fonts
+- build script
 
 
 # Some comments
