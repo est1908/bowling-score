@@ -1,5 +1,5 @@
 import { FrameTryEnum } from '../types';
-import { ScoreTable } from './score-table';
+import { ScoreTableDefault } from './score-table';
 
 describe('Score table', () => {
     it('should be initialized properly', () => {
@@ -134,6 +134,6 @@ describe('Score table', () => {
     });
 
     function createTable() {
-        return new ScoreTable();
+        return new ScoreTableDefault();
     }
 });

@@ -1,0 +1,45 @@
+//frame-item
+
+.score-frames {
+    display: flex;
+    .score-frames__frame {
+    }
+}
+
+.frame {
+    height: 50px;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+
+    &:last-child {
+        border-right: 1px solid black;
+    }
+
+    .frame__tries {
+        display: flex;
+    }
+
+    .frame__try {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+        text-align: center;
+
+        &:first-child {
+            border: none;
+        }
+    }
+}
+
+// Action Buttons
+
+.action-buttons {
+    .action-buttons__button {
+        margin: 5px;
+        width: 32px;
+        height: 32px;
+    }
+}

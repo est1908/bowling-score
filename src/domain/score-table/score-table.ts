@@ -1,10 +1,10 @@
 import { Frame } from '../frame/frame';
 import { LastFrame, RegularFrame } from '../frame/index';
-import { FrameScore } from '../types';
+import { FrameScore, ScoreTable } from '../types';
 
 export const FRAMES_COUNT = 10;
 
-export class ScoreTable {
+export class ScoreTableDefault implements ScoreTable {
     private readonly _frames: Frame[] = Array(FRAMES_COUNT);
     private _currentFrameIndex = 0;
 

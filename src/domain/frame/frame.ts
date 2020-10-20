@@ -1,6 +1,5 @@
-import { FrameTry, FrameTryEnum } from '../types';
+import { FrameTry, FrameTryEnum, MAX_PINS_COUNT } from '../types';
 
-export const MAX_PINS_COUNT = 10;
 
 export abstract class Frame {
     protected _tries: number[] = [];

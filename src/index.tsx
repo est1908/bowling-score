@@ -1,7 +1,7 @@
 // import 'styles/style.scss';
 import React from 'react';
 import { render } from 'react-dom';
-import App from './App';
+import App from './components/smart/app-component';
 import 'reset-css';
 import './styles/style.scss';
 

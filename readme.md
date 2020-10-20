@@ -1,18 +1,19 @@
 # Project structure
 
+Domain folder contains app logic isolated from framework. Also interfaces in domain/types.ts used to isolate implemention details from view layer
+
 -   Domain
     Isolated app logic,
 
 # TODO:
 
--   prettier
+- adaptive
+- last cell
+- score
 -   tslint
 -   css animatiomns
 -   bowling good background ->
--   fonts
 -   build script
--   show exceptions in UI
--   disable buttons what can cause exceptions
     -deploy to bowling-score.est1908.club
 -   method ordering (by access level)
 -   think about implementing command pattern

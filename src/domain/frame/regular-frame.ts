@@ -1,4 +1,5 @@
-import { Frame, MAX_PINS_COUNT } from './frame';
+import { MAX_PINS_COUNT } from '..';
+import { Frame } from './frame';
 
 export class RegularFrame extends Frame {
     public get isStrike(): boolean {
