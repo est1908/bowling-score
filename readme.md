@@ -1,18 +1,21 @@
-
 # Project structure
 
-- Domain
-Isolated app logic,
-
+-   Domain
+    Isolated app logic,
 
 # TODO:
-- prettier 
-- tslint
-- css animatiomns 
-- bowling good background -> 
-- fonts
-- build script
 
+-   prettier
+-   tslint
+-   css animatiomns
+-   bowling good background ->
+-   fonts
+-   build script
+-   show exceptions in UI
+-   disable buttons what can cause exceptions
+    -deploy to bowling-score.est1908.club
+-   method ordering (by access level)
+-   think about implementing command pattern
 
 # Some comments
 

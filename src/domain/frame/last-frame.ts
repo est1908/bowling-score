@@ -1,0 +1,23 @@
+import { Frame, MAX_PINS_COUNT } from './frame';
+
+export class LastFrame extends Frame {
+    public get isFull(): boolean {
+        if (this.triesCount < 2) {
+            return false;
+        } else if (this.triesCount == 2) {
+            const isThirdThrowAllowed = this.triesSum >= MAX_PINS_COUNT;
+            return !isThirdThrowAllowed;
+        }
+        return true;
+    }
+
+    public get pinsAvailable(): number {
+        if (this.triesCount == 0) {
+            return MAX_PINS_COUNT;
+        }
+        if (this.isFull) {
+            return 0;
+        }
+        return this.lastTry == MAX_PINS_COUNT ? MAX_PINS_COUNT : MAX_PINS_COUNT - this.lastTry;
+    }
+}

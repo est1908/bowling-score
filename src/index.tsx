@@ -5,8 +5,5 @@ import App from './App';
 import 'reset-css';
 import './styles/style.scss';
 
-const element = (<App/>);
-render(
-    element,
-    document.getElementById('root')
-  );
+const element = <App />;
+render(element, document.getElementById('root'));
