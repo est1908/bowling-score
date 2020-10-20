@@ -1,3 +1,4 @@
+import { FrameTryEnum } from '../types';
 import { RegularFrame } from './regular-frame';
 
 describe('regular frame', () => {
@@ -6,21 +7,23 @@ describe('regular frame', () => {
             const frame = createFrame();
 
             expect(frame.triesCount).toBe(0);
+            expect(frame.tries).toEqual([FrameTryEnum.None, FrameTryEnum.None]);
             expect(frame.pinsAvailable).toBe(10);
             expect(frame.isSpare).toBeFalsy();
             expect(frame.isStrike).toBeFalsy();
-            expect(frame.isFull).toBeFalsy();
+            expect(frame.isComplete).toBeFalsy();
         });
         it('should accept first ball throw (0, )', () => {
             const frame = createFrame();
             frame.add(0);
 
             expect(frame.triesCount).toBe(1);
+            expect(frame.tries).toEqual([0, FrameTryEnum.None]);
             expect(frame.pinsAvailable).toBe(10);
             expect(frame.getTry(0)).toBe(0);
             expect(frame.isSpare).toBeFalsy();
             expect(frame.isStrike).toBeFalsy();
-            expect(frame.isFull).toBeFalsy();
+            expect(frame.isComplete).toBeFalsy();
         });
 
         it('should calculate pinsAvailable (5, )', () => {
@@ -28,6 +31,7 @@ describe('regular frame', () => {
             frame.add(5);
 
             expect(frame.triesCount).toBe(1);
+            expect(frame.tries).toEqual([5, FrameTryEnum.None]);
             expect(frame.pinsAvailable).toBe(5);
         });
 
@@ -37,10 +41,11 @@ describe('regular frame', () => {
             frame.add(3);
 
             expect(frame.triesCount).toBe(2);
+            expect(frame.tries).toEqual([2, 3]);
             expect(frame.pinsAvailable).toBe(0);
             expect(frame.getTry(0)).toBe(2);
             expect(frame.getTry(1)).toBe(3);
-            expect(frame.isFull).toBeTruthy();
+            expect(frame.isComplete).toBeTruthy();
         });
 
         it('should accept spare (0, 10)', () => {
@@ -49,11 +54,26 @@ describe('regular frame', () => {
             frame.add(10);
 
             expect(frame.triesCount).toBe(2);
+            expect(frame.tries).toEqual([0, FrameTryEnum.Spare]);
             expect(frame.pinsAvailable).toBe(0);
             expect(frame.getTry(0)).toBe(0);
             expect(frame.getTry(1)).toBe(10);
             expect(frame.isSpare).toBeTruthy();
             expect(frame.isStrike).toBeFalsy();
+        });
+
+        it('should be reset properly', () => {
+            const frame = createFrame();
+            frame.add(0);
+            frame.add(10);
+            frame.reset();
+
+            expect(frame.triesCount).toBe(0);
+            expect(frame.tries).toEqual([FrameTryEnum.None, FrameTryEnum.None]);
+            expect(frame.pinsAvailable).toBe(10);
+            expect(frame.isSpare).toBeFalsy();
+            expect(frame.isStrike).toBeFalsy();
+            expect(frame.isComplete).toBeFalsy();
         });
         it('should accept spare  (5, 5)', () => {
             const frame = createFrame();
@@ -70,10 +90,56 @@ describe('regular frame', () => {
         it('should accept strike (10, )', () => {
             const frame = createFrame();
             frame.add(10);
-
+            expect(frame.tries).toEqual([FrameTryEnum.Strike, FrameTryEnum.None]);
             expect(frame.isSpare).toBeFalsy();
             expect(frame.isStrike).toBeTruthy();
-            expect(frame.isFull).toBeTruthy();
+            expect(frame.isComplete).toBeTruthy();
+        });
+    });
+
+    describe('score calculation', () => {
+        it('calculate scores on simple frame', () => {
+            const frame = createFrame([1, 3]);
+            expect(frame.isComplete).toBeTruthy();
+            expect(frame.getScore()).toBe(1 + 3);
+        });
+
+        it('calculate scores on spare frame', () => {
+            const frame1 = createFrame([1, 9]);
+            const frame2 = createFrame([5]);
+            frame1.nextFrame = frame2;
+            expect(frame1.getScore()).toBe(1 + 9 + 5);
+        });
+
+        it('calculate scores on strike frame', () => {
+            const frame1 = createFrame([10]);
+            const frame2 = createFrame([5, 3]);
+            frame1.nextFrame = frame2;
+            expect(frame1.getScore()).toBe(10 + 5 + 3);
+        });
+
+        it('calculate scores on 3 strikes frame', () => {
+            const frame1 = createFrame([10]);
+            const frame2 = createFrame([10]);
+            const frame3 = createFrame([10]);
+            frame1.nextFrame = frame2;
+            frame2.nextFrame = frame3;
+            expect(frame1.getScore()).toBe(10 + 10 + 10);
+        });
+
+        it('calculate scores on 2 strikes frame', () => {
+            const frame1 = createFrame([10]);
+            const frame2 = createFrame([10]);
+            const frame3 = createFrame([]);
+            frame1.nextFrame = frame2;
+            frame2.nextFrame = frame3;
+            expect(frame1.getScore()).toBe(null);
+        });
+
+        it('should allow to getScore only on completed frame', () => {
+            const frame = createFrame([1]);
+            expect(frame.isComplete).toBeFalsy();
+            expect(frame.getScore()).toBe(null);
         });
     });
 
@@ -109,7 +175,11 @@ describe('regular frame', () => {
         });
     });
 
-    function createFrame() {
-        return new RegularFrame();
+    function createFrame(tries: number[] | null = null) {
+        const frame = new RegularFrame(null);
+        if (tries != null) {
+            tries.forEach((pins) => frame.add(pins));
+        }
+        return frame;
     }
 });
