@@ -14,7 +14,9 @@ module.exports = {
     entry: './src/index.tsx',
 
     output: {
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, './dist'),
+        filename: 'bundle.js',
+        publicPath: '/dist'
     },
     module: {
         rules: [
@@ -28,7 +30,10 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|gif)$/,
-                use: ['file-loader']
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'images'
+                }
             }
         ]
     },
