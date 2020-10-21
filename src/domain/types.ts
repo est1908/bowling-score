@@ -18,6 +18,7 @@ export interface ScoreTable {
     frameScores: FrameScore[];
     totalScore: number;
     pinsAvailable: number;
+    isGameFinished: boolean;
     add(pins: number): void
     reset(): void
 }

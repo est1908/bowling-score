@@ -7,6 +7,10 @@ Domain folder contains app logic isolated from framework. Also interfaces in dom
 
 # TODO:
 
+- select current cell with color
+- glue
+- strike 
+- spare
 - adaptive
 - last cell
 - score

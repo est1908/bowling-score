@@ -6,7 +6,6 @@ import Frame from './frame-component';
 type Props = {
     frameScores: FrameScore[];
     pinsAvailable: number;
-    onClick: (pins: ActionButtonCode) => void;
 };
 
 export default function ScoreTable(props: Props) {
@@ -14,15 +13,10 @@ export default function ScoreTable(props: Props) {
         <div className="score-table">
             <div className="score-frames">
                 {props.frameScores.map((x, i) => (
-                    <Frame key={i} {...x} />
+                    <Frame key={i} {...x}  />
                 ))}
             </div>
-            <ActionButtons
-                maxNumber={props.pinsAvailable}
-                spareEnabled={true}
-                strikeEnabled={props.pinsAvailable == MAX_PINS_COUNT}
-                onClick={props.onClick}
-            />
+            
         </div>
     );
 }

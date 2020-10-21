@@ -1,7 +1,20 @@
+import { FrameTryEnum } from '..';
 import { LastFrame } from './last-frame';
 
 describe('last frame', () => {
     describe('positive cases', () => {
+
+        it('should be initialized properly', () => {
+            const frame = createFrame();
+
+            expect(frame.triesCount).toBe(0);
+            expect(frame.tries).toEqual([FrameTryEnum.None, FrameTryEnum.None, FrameTryEnum.None]);
+            expect(frame.pinsAvailable).toBe(10);
+            expect(frame.isComplete).toBeFalsy();
+        });
+
+        //todo: next step to move strike
+        //todo: remove get try
         it('should allow 2 attempts unless strike or spare', () => {
             const frame = createFrame();
             frame.add(1);
