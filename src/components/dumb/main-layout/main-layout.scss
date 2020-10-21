@@ -1,12 +1,23 @@
+@import '../../../styles/variables';
+
 .main-layout {
     display: flex;
     flex-direction: column;
 
-    &__header{
+    &__header {
+        display: none;
         height: 300px;
         width: 100%;
         background-image: url('/src/images/header.jpg');
         background-position: center 37.6%;
         background-size: cover;
+    }
+}
+
+@media only screen and (min-width: $mobile-breakpoint) {
+    .main-layout {
+        &__header {
+            display: block;
+        }
     }
 }

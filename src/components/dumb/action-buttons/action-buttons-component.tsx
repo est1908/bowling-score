@@ -1,7 +1,6 @@
 import React from 'react';
 import './action-buttons.scss';
 
-
 export type ActionButtonCode = number | '/' | 'x';
 
 type Props = {
@@ -27,7 +26,12 @@ export default function ActionButtons(props: Props) {
     return (
         <div className="action-buttons">
             {itemCodes.map((x) => (
-                <button className="action-buttons__button" disabled={!isBtnEnabled(x)} key={x} onClick={() => props.onClick(x as ActionButtonCode)}>
+                <button
+                    className="action-buttons__button"
+                    disabled={!isBtnEnabled(x)}
+                    key={x}
+                    onClick={() => props.onClick(x as ActionButtonCode)}
+                >
                     {x}
                 </button>
             ))}

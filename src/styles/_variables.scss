@@ -1,31 +1,22 @@
 // Colors
-
-//$background-color: #fdfdfd;
-
 $black-color: rgb(55, 53, 47);
-//$black-color: #6e84a3;
 $white-color: #ffffff;
 $gray-color: #e2e6ed;
-
 $blue-color: #2c7be5;
 $blue-dark-color: #1a68d1;
 
-$text-color: #061010;
-$background-color: #fafbfb;
-
-// Borders
-
-$border-color: #061010;
+// Default text color
+$text-color: $black-color;
 
 // Button colors
-
 $button-text-color: $white-color;
 $button-background-color: $blue-color;
 $button-hover-background-color: $blue-dark-color;
 $button-disabled-background-color: $gray-color;
 $button-disabled-text-color: $text-color;
 
-
 // Spacing
-
 $space: 4px;
+
+// Media query breakpoints
+$mobile-breakpoint: 768px

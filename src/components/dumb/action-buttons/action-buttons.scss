@@ -1,6 +1,8 @@
+@import '../../../styles/variables';
+
 .action-buttons {
     &__button {
-        margin: 5px;
+        margin: 2 * $space;
         width: 32px;
         height: 32px;
         padding: 0;

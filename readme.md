@@ -1,3 +1,11 @@
+# Bowling score calculator
+
+Online bowling score calculator for [Ten-pin bowling](https://en.wikipedia.org/wiki/Ten-pin_bowling)
+
+**/** - means Spare
+**x** - means Strike
+
+Te
 # Project structure
 
 Application is devided by 2 layer

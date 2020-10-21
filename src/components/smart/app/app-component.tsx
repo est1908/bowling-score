@@ -4,8 +4,9 @@ import ActionButtons, { ActionButtonCode } from '../../dumb/action-buttons/actio
 import ScoreTableComponent from '../../dumb/score-table/score-table-component';
 import './app.scss';
 
+
 type Props = {
-    scoreTable: ScoreTable;
+    scoreTable: ScoreTable
 };
 
 type State = {
@@ -35,6 +36,7 @@ function mapToState(scoreTable: ScoreTable): State {
 }
 
 export default class App extends Component<Props, State> {
+
     constructor(props: Props) {
         super(props);
         this.state = mapToState(this.props.scoreTable);
@@ -50,11 +52,11 @@ export default class App extends Component<Props, State> {
                     <ScoreTableComponent
                         frameScores={this.state.frameScores}
                         pinsAvailable={this.state.pinsAvailable}
-                        totalScore={this.state.totalScore}
+                        totalScore = {this.state.totalScore}
                     />
                 </div>
                 <div className="app-container__action-buttons">
-                    <div className="app-container__status-text">{this.state.statusText}</div>
+                    <div className="app-container__status-text">🎳 {this.state.statusText}</div>
                     {!this.state.isGameFinished && (
                         <ActionButtons
                             maxNumber={this.state.pinsAvailable}
