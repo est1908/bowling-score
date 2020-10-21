@@ -1,26 +1,18 @@
 @import '../../../styles/variables';
 
 .score-table {
-    max-width: 600px;
+    max-width: 768px;
     margin: auto;
 
     &__score-frames {
         display: grid;
-        grid-gap: 8px;
-        grid-template-columns: repeat(6, 50px);
-        grid-template-rows: repeat(2, 50px);
+        grid-gap: 2 * $space;
+        grid-template-columns: repeat(6, 60px);
+        grid-template-rows: repeat(2, 60px);
     }
 
     &__frame {
         border: 1px solid $border-color;
-        // &:last-child {
-        //     border-right: 1px solid $border-color;
-        // }
-
-        // border-left: 1px solid $border-color;
-        // border-top: 1px solid $border-color;
-        // border-bottom: 1px solid $border-color;
-        // border-top: 1px solid $border-color;
     }
 
     &__total-score-frame {
@@ -34,8 +26,8 @@
 @media only screen and (min-width: $mobile-breakpoint) {
     .score-table {
         &__score-frames {
-            grid-template-columns: repeat(11, 50px);
-            grid-template-rows: 50px;
+            grid-template-columns: repeat(11, 60px);
+            grid-template-rows: 60px;
         }
 
         &__total-score-frame {

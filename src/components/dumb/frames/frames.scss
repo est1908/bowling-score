@@ -1,18 +1,24 @@
 @import '../../../styles/variables';
 
 .frame {
-
     height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &_highligted {
+        box-shadow: 0 0 10px #9ecaed;
+        // todo add animation
+    }
 
     &__tries {
         display: flex;
     }
 
     &__try {
-        width: 25px;
-        height: 25px;
-        line-height: 25px;
-        font-size: 13px;
+        height: 30px;
+        width: 60px;
+        line-height: 30px;
+        font-size: 14px;
         border-left: 1px solid $border-color;
         border-bottom: 1px solid $border-color;
         text-align: center;
@@ -23,7 +29,7 @@
     }
 
     &__score {
-        height: 25px;
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
