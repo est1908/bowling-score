@@ -15,9 +15,13 @@ export default function ScoreTable(props: Props) {
         <div className="score-table">
             <div className="score-table__score-frames">
                 {props.frameScores.map((x, i) => (
-                    <Frame key={i} tries={x.tries} score={x.accumulatedScore} />
+                    <div className="score-table__frame">
+                        <Frame key={i} tries={x.tries} score={x.accumulatedScore} />
+                    </div>
                 ))}
-                <TotalScoreFrame key="total" score={props.totalScore} />
+                <div className="score-table__total-score-frame">
+                    <TotalScoreFrame key="total" score={props.totalScore} />
+                </div>
             </div>
         </div>
     );

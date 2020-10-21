@@ -1,9 +1,46 @@
+@import '../../../styles/variables';
+
 .score-table {
     max-width: 600px;
     margin: auto;
 
     &__score-frames {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-gap: 8px;
+        grid-template-columns: repeat(6, 50px);
+        grid-template-rows: repeat(2, 50px);
+    }
+
+    &__frame {
+        border: 1px solid $border-color;
+        // &:last-child {
+        //     border-right: 1px solid $border-color;
+        // }
+
+        // border-left: 1px solid $border-color;
+        // border-top: 1px solid $border-color;
+        // border-bottom: 1px solid $border-color;
+        // border-top: 1px solid $border-color;
+    }
+
+    &__total-score-frame {
+        border: 1px solid $border-color;
+        background-color: $gray-color;
+        grid-column: 6;
+        grid-row: 1 / -1;
+    }
+}
+
+@media only screen and (min-width: $mobile-breakpoint) {
+    .score-table {
+        &__score-frames {
+            grid-template-columns: repeat(11, 50px);
+            grid-template-rows: 50px;
+        }
+
+        &__total-score-frame {
+            grid-column: unset;
+            grid-row: unset;
+        }
     }
 }
