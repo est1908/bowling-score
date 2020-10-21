@@ -44,7 +44,7 @@ export default class App extends Component<Props, State> {
 
     render() {
         return (
-            <div className="app-container" tabIndex={0} onKeyDown={this.handleKeyDown}>
+            <div className="app-container" onKeyDown={this.handleKeyDown}>
                 <h1 className="app-container__title">Bowling score calculator</h1>
                 <div className="app-container__score-table">{this.renderScoreTable()}</div>
                 <div className="app-container__action-buttons">{this.renderActionButtons()}</div>

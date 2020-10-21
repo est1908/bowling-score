@@ -21,6 +21,7 @@
 
     &__status-text {
         margin-bottom: 2 * $space;
+        user-select: none;
     }
 
     &__action-buttons {
