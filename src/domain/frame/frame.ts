@@ -1,4 +1,4 @@
-import { TryDisplaySymbol, MAX_PINS_COUNT } from '../types';
+import { MAX_PINS_COUNT, TryDisplaySymbol } from '../types';
 
 export abstract class Frame {
     protected _tries: number[] = [];
@@ -52,7 +52,7 @@ export abstract class Frame {
             sum += this._tries[i];
         }
         const remainingCount = count > this._tries.length ? count - this._tries.length : 0;
-        if (remainingCount == 0) {
+        if (remainingCount === 0) {
             return sum;
         }
         const nextFrame = this.nextFrame as Frame;

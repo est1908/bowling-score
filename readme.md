@@ -24,7 +24,6 @@ Domain folder contains app logic isolated from framework. Also interfaces in dom
 -   accessibility
 
 -   sort-imports ?!
--   tslint
 -   build script
     -deploy to bowling-score.est1908.club
 -   method ordering (by access level)

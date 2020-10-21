@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
 import './action-buttons.scss';
 
 export type ActionButtonCode = number | '/' | 'x';

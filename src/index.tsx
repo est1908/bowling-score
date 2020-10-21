@@ -1,10 +1,10 @@
+import App from './components/smart/app/app-component';
+import MainLayout from './components/dumb/main-layout/main-layout-component';
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/smart/app/app-component';
-import 'reset-css';
-import './styles/style.scss';
-import MainLayout from './components/dumb/main-layout/main-layout-component';
 import { ScoreTableDefault } from './domain';
+import './styles/style.scss';
+import 'reset-css';
 
 const scoreTable = new ScoreTableDefault();
 

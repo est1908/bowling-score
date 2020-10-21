@@ -1,8 +1,8 @@
-import React from 'react';
-import { FrameScore } from '../../../domain';
-import Frame from '../frames/frame-component';
-import TotalScoreFrame from '../frames/total-score-frame-component';
 import cls from 'classnames';
+import Frame from '../frames/frame-component';
+import React from 'react';
+import TotalScoreFrame from '../frames/total-score-frame-component';
+import { FrameScore } from '../../../domain';
 import './score-table.scss';
 
 type Props = {

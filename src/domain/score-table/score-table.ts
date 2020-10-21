@@ -1,6 +1,6 @@
 import { Frame } from '../frame/frame';
-import { LastFrame, RegularFrame } from '../frame/index';
 import { FrameScore, ScoreTable } from '../types';
+import { LastFrame, RegularFrame } from '../frame/index';
 
 export const FRAMES_COUNT = 10;
 
@@ -17,7 +17,7 @@ export class ScoreTableDefault implements ScoreTable {
     }
 
     get isGameFinished(): boolean {
-        return this._currentFrameIndex == FRAMES_COUNT - 1 && this.currentFrame.isComplete;
+        return this._currentFrameIndex === FRAMES_COUNT - 1 && this.currentFrame.isComplete;
     }
 
     get currentFrame(): Frame {
@@ -38,8 +38,8 @@ export class ScoreTableDefault implements ScoreTable {
             const frameScore: FrameScore = {
                 tries: curFrame.tryDisplayInfos,
                 isComplete: curFrame.isComplete,
-                score: score,
-                accumulatedScore: score !== null ? score + scoresAccumulator : null
+                accumulatedScore: score !== null ? score + scoresAccumulator : null,
+                score
             };
             res.push(frameScore);
             scoresAccumulator += score !== null ? score : 0;
@@ -49,7 +49,7 @@ export class ScoreTableDefault implements ScoreTable {
 
     constructor() {
         for (let i = FRAMES_COUNT - 1; i >= 0; i--) {
-            const frame = i == FRAMES_COUNT - 1 ? new LastFrame() : new RegularFrame(this._frames[i + 1]);
+            const frame = i === FRAMES_COUNT - 1 ? new LastFrame() : new RegularFrame(this._frames[i + 1]);
             this._frames[i] = frame;
         }
     }

@@ -1,5 +1,5 @@
-import { TrySpecialSymbol } from '..';
 import { LastFrame } from './last-frame';
+import { TrySpecialSymbol } from '..';
 
 describe('last frame', () => {
     describe('positive cases', () => {
@@ -15,10 +15,6 @@ describe('last frame', () => {
             expect(frame.isComplete).toBeFalsy();
         });
 
-        //todo: add shadow to fields
-        //todo: add shadow to next cell
-        //todo: next step to move strike
-        //todo: remove get try
         it('should allow 2 attempts unless strike or spare', () => {
             const frame = createFrame();
             frame.add(1);

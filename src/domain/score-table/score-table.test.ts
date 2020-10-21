@@ -1,5 +1,5 @@
-import { TrySpecialSymbol } from '../types';
 import { ScoreTableDefault } from './score-table';
+import { TrySpecialSymbol } from '../types';
 
 describe('Score table', () => {
     it('should be initialized properly', () => {

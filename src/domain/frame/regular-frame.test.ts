@@ -1,5 +1,5 @@
-import { TrySpecialSymbol } from '../types';
 import { RegularFrame } from './regular-frame';
+import { TrySpecialSymbol } from '../types';
 
 describe('regular frame', () => {
     describe('positive cases', () => {

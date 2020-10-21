@@ -1,19 +1,19 @@
-import { MAX_PINS_COUNT, TryDisplaySymbol, TrySpecialSymbol } from '..';
 import { Frame } from './frame';
+import { MAX_PINS_COUNT, TryDisplaySymbol, TrySpecialSymbol } from '..';
 
 const MAX_TRIES_COUNT = 2;
 
 export class RegularFrame extends Frame {
     public get isStrike(): boolean {
-        return this._tries.length == 1 && this._tries[0] === MAX_PINS_COUNT;
+        return this._tries.length === 1 && this._tries[0] === MAX_PINS_COUNT;
     }
 
     public get isSpare(): boolean {
-        return this._tries.length == 2 && this.frameTriesSum == MAX_PINS_COUNT;
+        return this._tries.length === 2 && this.frameTriesSum === MAX_PINS_COUNT;
     }
 
     public get isComplete(): boolean {
-        return this.isStrike || this._tries.length == 2;
+        return this.isStrike || this._tries.length === 2;
     }
 
     public get frameMaxTries(): number {
@@ -21,7 +21,7 @@ export class RegularFrame extends Frame {
     }
 
     public get pinsAvailable(): number {
-        if (this.triesCount == 0) {
+        if (this.triesCount === 0) {
             return MAX_PINS_COUNT;
         }
         if (this.isComplete) {
@@ -48,7 +48,7 @@ export class RegularFrame extends Frame {
         if (!this.isComplete) {
             return null;
         }
-        if (this.nextTriesCountIncludedInScore == 0) {
+        if (this.nextTriesCountIncludedInScore === 0) {
             return this.frameTriesSum;
         }
         // Regular frame always should have nextFrame so no problem with that

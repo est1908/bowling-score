@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { FrameScore, MAX_PINS_COUNT, ScoreTable } from '../../../domain';
 import ActionButtons, { ActionButtonCode } from '../../dumb/action-buttons/action-buttons-component';
+import React, { Component } from 'react';
 import ScoreTableComponent from '../../dumb/score-table/score-table-component';
+import { FrameScore, MAX_PINS_COUNT, ScoreTable } from '../../../domain';
 import './app.scss';
 
 type Props = {
@@ -46,30 +46,40 @@ export default class App extends Component<Props, State> {
         return (
             <div className="app-container" tabIndex={0} onKeyDown={this.handleKeyDown}>
                 <h1 className="app-container__title">Bowling score calculator</h1>
-                <div className="app-container__score-table">
-                    <ScoreTableComponent
-                        frameScores={this.state.frameScores}
-                        currentFrameIndex={!this.state.isGameFinished ? this.state.currentFrameIndex : null}
-                        pinsAvailable={this.state.pinsAvailable}
-                        totalScore={this.state.totalScore}
-                        isGameFinished={this.state.isGameFinished}
-                    />
-                </div>
-                <div className="app-container__action-buttons">
-                    <div className="app-container__status-text">🎳 {this.state.statusText}</div>
-                    {!this.state.isGameFinished && (
-                        <ActionButtons
-                            maxNumber={this.state.pinsAvailable}
-                            spareEnabled={this.state.pinsAvailable < MAX_PINS_COUNT}
-                            strikeEnabled={this.state.pinsAvailable === MAX_PINS_COUNT}
-                            onClick={this.handleAddPins}
-                        />
-                    )}
-                </div>
+                <div className="app-container__score-table">{this.renderScoreTable()}</div>
+                <div className="app-container__action-buttons">{this.renderActionButtons()}</div>
                 <button className="app-container__btn-new-game" onClick={this.handleNewGame}>
                     New Game
                 </button>
             </div>
+        );
+    }
+
+    renderScoreTable() {
+        return (
+            <ScoreTableComponent
+                frameScores={this.state.frameScores}
+                currentFrameIndex={!this.state.isGameFinished ? this.state.currentFrameIndex : null}
+                pinsAvailable={this.state.pinsAvailable}
+                totalScore={this.state.totalScore}
+                isGameFinished={this.state.isGameFinished}
+            />
+        );
+    }
+
+    renderActionButtons() {
+        return (
+            <>
+                <div className="app-container__status-text">🎳 {this.state.statusText}</div>
+                {!this.state.isGameFinished && (
+                    <ActionButtons
+                        maxNumber={this.state.pinsAvailable}
+                        spareEnabled={this.state.pinsAvailable < MAX_PINS_COUNT}
+                        strikeEnabled={this.state.pinsAvailable === MAX_PINS_COUNT}
+                        onClick={this.handleAddPins}
+                    />
+                )}
+            </>
         );
     }
 
