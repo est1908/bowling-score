@@ -61,6 +61,15 @@ export class ScoreTableDefault implements ScoreTable {
         }
     }
 
+    undo(): void {
+        if (this.currentFrame.triesCount > 0) {
+            this.currentFrame.undo();
+        } else if (this.currentFrame.triesCount === 0 && this._currentFrameIndex > 0) {
+            this._currentFrameIndex -= 1;
+            this.currentFrame.undo();
+        }
+    }
+
     reset() {
         this._frames.forEach((x) => x.reset());
         this._currentFrameIndex = 0;

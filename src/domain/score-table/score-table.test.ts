@@ -155,6 +155,31 @@ describe('Score table', () => {
         expect(table.totalScore).toBe(300);
     });
 
+    it('allow undo try from current frame', () => {
+        const table = createTable();
+        table.add(1);
+        table.add(4);
+        expect(table.currentFrameIndex).toBe(1);
+        table.undo();
+        expect(table.currentFrameIndex).toBe(0);
+        expect(table.frameScores[0]).toEqual({
+            tries: [1, TrySpecialSymbol.None],
+            score: null,
+            accumulatedScore: null,
+            isComplete: false
+        });
+    });
+
+    it('allow undo try from previus frame', () => {
+        const table = createTable();
+        table.add(1);
+        table.add(4);
+        table.add(5);
+        table.undo();
+        expect(table.currentFrameIndex).toBe(1);
+        expect(table.totalScore).toBe(1 + 4);
+    });
+
     function createTable() {
         return new ScoreTableDefault();
     }

@@ -38,6 +38,12 @@ export abstract class Frame {
         this._tries.push(pins);
     }
 
+    public undo(): void {
+        if (this._tries.length > 0) {
+            this._tries.pop();
+        }
+    }
+
     public reset(): void {
         this._tries = [];
     }

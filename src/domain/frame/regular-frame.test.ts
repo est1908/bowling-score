@@ -90,6 +90,25 @@ describe('regular frame', () => {
             expect(frame.isStrike).toBeTruthy();
             expect(frame.isComplete).toBeTruthy();
         });
+
+        it('should allow undo', () => {
+            const frame = createFrame();
+            frame.add(1);
+            expect(frame.tryDisplayInfos).toEqual([1, TrySpecialSymbol.None]);
+            frame.undo();
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.None, TrySpecialSymbol.None]);
+        });
+        it('should allow undo nothing', () => {
+            const frame = createFrame();
+            frame.undo();
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.None, TrySpecialSymbol.None]);
+        });
+        it('should allow undo strike', () => {
+            const frame = createFrame();
+            frame.add(10);
+            frame.undo();
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.None, TrySpecialSymbol.None]);
+        });
     });
 
     describe('score calculation', () => {
