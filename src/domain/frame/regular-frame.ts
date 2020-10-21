@@ -1,7 +1,10 @@
-import { MAX_PINS_COUNT } from '..';
+import { MAX_PINS_COUNT, TryDisplaySymbol, TrySpecialSymbol } from '..';
 import { Frame } from './frame';
 
+const MAX_TRIES_COUNT = 2
+
 export class RegularFrame extends Frame {
+
     public get isStrike(): boolean {
         return this._tries.length == 1 && this._tries[0] === MAX_PINS_COUNT;
     }
@@ -42,7 +45,7 @@ export class RegularFrame extends Frame {
         this.nextFrame = nextFrame;
     }
 
-    public getScore(): number | null {
+    public calculateScore(): number | null {
         if (!this.isComplete) {
             return null;
         }
@@ -56,5 +59,19 @@ export class RegularFrame extends Frame {
             return null;
         }
         return this.frameTriesSum + triesSum;
+    }
+
+    protected calculateTryDisplayInfos(): TryDisplaySymbol[] {
+        if (this.isStrike){
+            return [TrySpecialSymbol.None, TrySpecialSymbol.Strike];
+        }
+        if (this.isSpare){
+            return [this._tries[0], TrySpecialSymbol.Spare];
+        }
+        const res: TryDisplaySymbol[] = Array(MAX_TRIES_COUNT).fill(TrySpecialSymbol.None);
+        for (let i = 0; i < this._tries.length; i++){
+            res[i] = this._tries[i];
+        }
+        return res;
     }
 }

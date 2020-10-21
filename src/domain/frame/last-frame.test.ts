@@ -21,7 +21,7 @@ describe('last frame', () => {
             frame.add(1);
             frame.add(5);
             expect(frame.triesCount).toBe(2);
-            expect(frame.tryDisplayInfos).toEqual([0, 5, TrySpecialSymbol.None]);
+            expect(frame.tryDisplayInfos).toEqual([1, 5, TrySpecialSymbol.None]);
             expect(frame.isComplete).toBeTruthy();
         });
         it('should allow 3 attempts due to spare', () => {
@@ -63,6 +63,8 @@ describe('last frame', () => {
             const frame = createFrame();
             frame.add(1);
             frame.add(9);
+            expect(frame.isComplete).toBeFalsy();
+            expect(frame.pinsAvailable).toBe(10);
             frame.add(10);
             expect(frame.tryDisplayInfos).toEqual([1, TrySpecialSymbol.Spare, TrySpecialSymbol.Strike]);
         });
@@ -82,7 +84,7 @@ describe('last frame', () => {
             frame.add(2);
             frame.add(3);
             expect(frame.isComplete).toBeTruthy();
-            expect(frame.getScore()).toBe(2 + 3);
+            expect(frame.calculateScore()).toBe(2 + 3);
         });
 
         it('calculate scores on incomplete frame', () => {
@@ -90,7 +92,7 @@ describe('last frame', () => {
             frame.add(10);
             frame.add(2);
             expect(frame.isComplete).toBeFalsy();
-            expect(frame.getScore()).toBe(null);
+            expect(frame.calculateScore()).toBe(null);
         });
 
         it('calculate scores on strike spare frame', () => {
@@ -98,7 +100,7 @@ describe('last frame', () => {
             frame.add(10);
             frame.add(2);
             frame.add(8);
-            expect(frame.getScore()).toBe(20);
+            expect(frame.calculateScore()).toBe(20);
         });
 
         it('calculate scores on 3 strike frame', () => {
@@ -106,14 +108,14 @@ describe('last frame', () => {
             frame.add(10);
             frame.add(10);
             frame.add(10);
-            expect(frame.getScore()).toBe(30);
+            expect(frame.calculateScore()).toBe(30);
         });
         it('calculate scores on 3 and zero frame', () => {
             const frame = createFrame();
             frame.add(10);
             frame.add(10);
             frame.add(0);
-            expect(frame.getScore()).toBe(20);
+            expect(frame.calculateScore()).toBe(20);
         });
     });
 

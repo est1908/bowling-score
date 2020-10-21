@@ -96,21 +96,21 @@ describe('regular frame', () => {
         it('calculate scores on simple frame', () => {
             const frame = createFrame([1, 3]);
             expect(frame.isComplete).toBeTruthy();
-            expect(frame.getScore()).toBe(1 + 3);
+            expect(frame.calculateScore()).toBe(1 + 3);
         });
 
         it('calculate scores on spare frame', () => {
             const frame1 = createFrame([1, 9]);
             const frame2 = createFrame([5]);
             frame1.nextFrame = frame2;
-            expect(frame1.getScore()).toBe(1 + 9 + 5);
+            expect(frame1.calculateScore()).toBe(1 + 9 + 5);
         });
 
         it('calculate scores on strike frame', () => {
             const frame1 = createFrame([10]);
             const frame2 = createFrame([5, 3]);
             frame1.nextFrame = frame2;
-            expect(frame1.getScore()).toBe(10 + 5 + 3);
+            expect(frame1.calculateScore()).toBe(10 + 5 + 3);
         });
 
         it('calculate scores on 3 strikes frame', () => {
@@ -119,7 +119,7 @@ describe('regular frame', () => {
             const frame3 = createFrame([10]);
             frame1.nextFrame = frame2;
             frame2.nextFrame = frame3;
-            expect(frame1.getScore()).toBe(10 + 10 + 10);
+            expect(frame1.calculateScore()).toBe(10 + 10 + 10);
         });
 
         it('calculate scores on 2 strikes frame', () => {
@@ -128,13 +128,13 @@ describe('regular frame', () => {
             const frame3 = createFrame([]);
             frame1.nextFrame = frame2;
             frame2.nextFrame = frame3;
-            expect(frame1.getScore()).toBe(null);
+            expect(frame1.calculateScore()).toBe(null);
         });
 
         it('should allow to getScore only on completed frame', () => {
             const frame = createFrame([1]);
             expect(frame.isComplete).toBeFalsy();
-            expect(frame.getScore()).toBe(null);
+            expect(frame.calculateScore()).toBe(null);
         });
     });
 

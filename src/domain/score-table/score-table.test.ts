@@ -88,7 +88,7 @@ describe('Score table', () => {
             isComplete: true
         });
         expect(table.frameScores[9]).toEqual({
-            tries: [2, 7],
+            tries: [2, 7, TrySpecialSymbol.None],
             score: 9,
             isComplete: true
         });
@@ -122,7 +122,7 @@ describe('Score table', () => {
             isComplete: true
         });
         expect(table.frameScores[8]).toEqual({
-            tries: [TrySpecialSymbol.Strike, TrySpecialSymbol.None],
+            tries: [TrySpecialSymbol.None, TrySpecialSymbol.Strike],
             score: 10 + 10 + 10,
             isComplete: true
         });

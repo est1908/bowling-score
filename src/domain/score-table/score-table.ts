@@ -9,7 +9,7 @@ export class ScoreTableDefault implements ScoreTable {
     private _currentFrameIndex = 0;
 
     get totalScore(): number {
-        return this._frames.reduce((accumulator, curFrame) => accumulator + (curFrame.getScore() || 0), 0);
+        return this._frames.reduce((accumulator, curFrame) => accumulator + (curFrame.calculateScore() || 0), 0);
     }
 
     get currentFrameIndex(): number {
@@ -32,7 +32,7 @@ export class ScoreTableDefault implements ScoreTable {
         return this._frames.map((curFrame, i) => ({
             tries: curFrame.tryDisplayInfos,
             isComplete: curFrame.isComplete,
-            score: curFrame.getScore()
+            score: curFrame.calculateScore()
         }));
     }
 

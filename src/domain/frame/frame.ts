@@ -7,8 +7,8 @@ export abstract class Frame {
 
     public abstract get isComplete(): boolean;
     public abstract get pinsAvailable(): number;
-    public abstract get frameMaxTries(): number;
-    public abstract getScore(): number | null;
+    public abstract calculateScore(): number | null;
+    protected abstract calculateTryDisplayInfos(): TryDisplaySymbol[];
     
     public get triesCount(): number {
         return this._tries.length;
@@ -65,26 +65,5 @@ export abstract class Frame {
             return null;
         }
         return sum + nextTriesSum;
-    }
-
-    private calculateTryDisplayInfos() {
-        const res = [];
-        for (let i = 0; i < this._tries.length; i++) {
-            const curTry = this._tries[i];
-            if (i > 0 && curTry > 0 && this._tries[i - 1] + curTry === MAX_PINS_COUNT) {
-                res.push(TrySpecialSymbol.Spare);
-            } else if (curTry === MAX_PINS_COUNT) {
-                res.push(TrySpecialSymbol.Strike);
-            } else {
-                res.push(curTry);
-            }
-        }
-        // fill with none values
-        if (res.length < this.frameMaxTries) {
-            for (let i = res.length; i < this.frameMaxTries; i++) {
-                res.push(TrySpecialSymbol.None);
-            }
-        }
-        return res;
     }
 }
