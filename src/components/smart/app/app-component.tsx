@@ -4,13 +4,13 @@ import ActionButtons, { ActionButtonCode } from '../../dumb/action-buttons/actio
 import ScoreTableComponent from '../../dumb/score-table/score-table-component';
 import './app.scss';
 
-
 type Props = {
-    scoreTable: ScoreTable
+    scoreTable: ScoreTable;
 };
 
 type State = {
     frameScores: FrameScore[];
+    currentFrameIndex: number;
     totalScore: number;
     pinsAvailable: number;
     statusText: string;
@@ -28,6 +28,7 @@ function getStatusText(scoreTable: ScoreTable): string {
 function mapToState(scoreTable: ScoreTable): State {
     return {
         frameScores: scoreTable.frameScores,
+        currentFrameIndex: scoreTable.currentFrameIndex,
         totalScore: scoreTable.totalScore,
         pinsAvailable: scoreTable.pinsAvailable,
         isGameFinished: scoreTable.isGameFinished,
@@ -36,23 +37,22 @@ function mapToState(scoreTable: ScoreTable): State {
 }
 
 export default class App extends Component<Props, State> {
-
     constructor(props: Props) {
         super(props);
         this.state = mapToState(this.props.scoreTable);
     }
 
-    componentDidMount() {}
-
     render() {
         return (
-            <div className="app-container">
+            <div className="app-container" tabIndex={0} onKeyDown={this.handleKeyDown}>
                 <h1 className="app-container__title">Bowling score calculator</h1>
                 <div className="app-container__score-table">
                     <ScoreTableComponent
                         frameScores={this.state.frameScores}
+                        currentFrameIndex={!this.state.isGameFinished ? this.state.currentFrameIndex : null}
                         pinsAvailable={this.state.pinsAvailable}
-                        totalScore = {this.state.totalScore}
+                        totalScore={this.state.totalScore}
+                        isGameFinished={this.state.isGameFinished}
                     />
                 </div>
                 <div className="app-container__action-buttons">
@@ -61,7 +61,7 @@ export default class App extends Component<Props, State> {
                         <ActionButtons
                             maxNumber={this.state.pinsAvailable}
                             spareEnabled={this.state.pinsAvailable < MAX_PINS_COUNT}
-                            strikeEnabled={this.state.pinsAvailable == MAX_PINS_COUNT}
+                            strikeEnabled={this.state.pinsAvailable === MAX_PINS_COUNT}
                             onClick={this.handleAddPins}
                         />
                     )}
@@ -82,6 +82,23 @@ export default class App extends Component<Props, State> {
     handleNewGame = () => {
         this.props.scoreTable.reset();
         this.updateState();
+    };
+
+    handleKeyDown = (e: any) => {
+        // todo: add a11y
+        // if (!e.charCode){
+        //     return;
+        // }
+        // if (!this.state.isGameFinished){
+        //     return;
+        // }
+        // var char = String.fromCharCode(e.charCode);
+        // if (char >= '0' && char <= '9') {
+        //     const pins = parseInt(char);
+        //     if (pins <= this.state.pinsAvailable){
+        //         this.props.scoreTable.add(pins)
+        //     }
+        // }
     };
 
     private updateState() {

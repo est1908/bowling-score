@@ -1,10 +1,12 @@
 import React from 'react';
 import { TryDisplaySymbol, TrySpecialSymbol } from '../../../domain/types';
 import './frames.scss';
+import cls from 'classnames';
 
 type Props = {
     tries: TryDisplaySymbol[];
     score: number | null;
+    highlighted: boolean;
 };
 
 export default function Frame(props: Props) {
@@ -28,7 +30,7 @@ export default function Frame(props: Props) {
     }
 
     return (
-        <div className="frame">
+        <div className={cls('frame', { frame_highlighted: props.highlighted })}>
             <div className="frame__tries">
                 {props.tries.map((x, i) => (
                     <div className="frame__try" key={i}>

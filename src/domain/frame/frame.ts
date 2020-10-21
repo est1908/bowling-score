@@ -1,6 +1,5 @@
 import { TryDisplaySymbol, MAX_PINS_COUNT } from '../types';
 
-
 export abstract class Frame {
     protected _tries: number[] = [];
     public nextFrame: Frame | null = null;
@@ -9,7 +8,7 @@ export abstract class Frame {
     public abstract get pinsAvailable(): number;
     public abstract calculateScore(): number | null;
     protected abstract calculateTryDisplayInfos(): TryDisplaySymbol[];
-    
+
     public get triesCount(): number {
         return this._tries.length;
     }

@@ -5,14 +5,15 @@ export interface ScoreTable {
     totalScore: number;
     pinsAvailable: number;
     isGameFinished: boolean;
-    add(pins: number): void
-    reset(): void
+    currentFrameIndex: number;
+    add(pins: number): void;
+    reset(): void;
 }
 
 export interface FrameScore {
     tries: TryDisplaySymbol[];
     score: number | null;
-    accumulatedScore: number | null;  // current frame score + sum of previous frames score
+    accumulatedScore: number | null; // current frame score + sum of previous frames score
     isComplete: boolean;
 }
 

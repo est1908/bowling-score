@@ -2,21 +2,24 @@ import React from 'react';
 import { FrameScore } from '../../../domain';
 import Frame from '../frames/frame-component';
 import TotalScoreFrame from '../frames/total-score-frame-component';
+import cls from 'classnames';
 import './score-table.scss';
 
 type Props = {
     frameScores: FrameScore[];
+    currentFrameIndex: number | null;
     totalScore: number;
     pinsAvailable: number;
+    isGameFinished: boolean;
 };
 
 export default function ScoreTable(props: Props) {
     return (
-        <div className="score-table">
+        <div className={cls('score-table', { 'score-table_highlighted': props.isGameFinished })}>
             <div className="score-table__score-frames">
                 {props.frameScores.map((x, i) => (
-                    <div className="score-table__frame">
-                        <Frame key={i} tries={x.tries} score={x.accumulatedScore} />
+                    <div key={i} className="score-table__frame" title={`Score for frame ${i + 1}`}>
+                        <Frame tries={x.tries} score={x.accumulatedScore} highlighted={i === props.currentFrameIndex} />
                     </div>
                 ))}
                 <div className="score-table__total-score-frame">

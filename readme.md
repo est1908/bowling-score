@@ -19,23 +19,14 @@ Domain folder contains app logic isolated from framework. Also interfaces in dom
 
 # TODO:
 
-- select current cell with color
-- glue
-- strike 
-- spare
-- adaptive
-- last cell
+- accessibility
+
 - sort-imports ?!
-- score
 -   tslint
--   css animatiomns
--   bowling good background ->
 -   build script
     -deploy to bowling-score.est1908.club
 -   method ordering (by access level)
--   think about implementing command pattern
-
-- discover about type
+- write doc
 
 # Some comments
 

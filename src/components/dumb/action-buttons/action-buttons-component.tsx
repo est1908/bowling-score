@@ -1,4 +1,5 @@
 import React from 'react';
+import { render } from 'react-dom';
 import './action-buttons.scss';
 
 export type ActionButtonCode = number | '/' | 'x';
@@ -21,20 +22,23 @@ export default function ActionButtons(props: Props) {
         return x <= props.maxNumber;
     }
 
-    let itemCodes = [...Array.from(Array(10).keys()), '/', 'x'];
+    function renderButton(actBtnCode: ActionButtonCode) {
+        function handleClick() {
+            props.onClick(actBtnCode);
+        }
 
-    return (
-        <div className="action-buttons">
-            {itemCodes.map((x) => (
-                <button
-                    className="action-buttons__button"
-                    disabled={!isBtnEnabled(x)}
-                    key={x}
-                    onClick={() => props.onClick(x as ActionButtonCode)}
-                >
-                    {x}
-                </button>
-            ))}
-        </div>
-    );
+        return (
+            <button
+                className="action-buttons__button"
+                disabled={!isBtnEnabled(actBtnCode)}
+                key={actBtnCode}
+                onClick={handleClick}
+            >
+                {actBtnCode}
+            </button>
+        );
+    }
+
+    const itemCodes: ActionButtonCode[] = [...Array.from(Array(10).keys()), '/', 'x'];
+    return <div className="action-buttons">{itemCodes.map((x) => renderButton(x))}</div>;
 }
