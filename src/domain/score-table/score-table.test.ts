@@ -1,4 +1,4 @@
-import { FrameTryEnum } from '../types';
+import { TrySpecialSymbol } from '../types';
 import { ScoreTableDefault } from './score-table';
 
 describe('Score table', () => {
@@ -7,7 +7,7 @@ describe('Score table', () => {
         expect(table.totalScore).toBe(0);
         expect(table.currentFrameIndex).toBe(0);
         expect(table.frameScores[0]).toEqual({
-            tries: [FrameTryEnum.None, FrameTryEnum.None],
+            tries: [TrySpecialSymbol.None, TrySpecialSymbol.None],
             score: null,
             isComplete: false
         });
@@ -19,7 +19,7 @@ describe('Score table', () => {
         expect(table.totalScore).toBe(0);
         expect(table.currentFrameIndex).toBe(0);
         expect(table.frameScores[0]).toEqual({
-            tries: [9, FrameTryEnum.None],
+            tries: [9, TrySpecialSymbol.None],
             score: null,
             isComplete: false
         });
@@ -67,7 +67,7 @@ describe('Score table', () => {
         });
         expect(table.isGameFinished).toBeFalsy();
         expect(table.frameScores[1]).toEqual({
-            tries: [3, FrameTryEnum.None],
+            tries: [3, TrySpecialSymbol.None],
             score: null,
             isComplete: false
         });
@@ -122,12 +122,12 @@ describe('Score table', () => {
             isComplete: true
         });
         expect(table.frameScores[8]).toEqual({
-            tries: [FrameTryEnum.Strike, FrameTryEnum.None],
+            tries: [TrySpecialSymbol.Strike, TrySpecialSymbol.None],
             score: 10 + 10 + 10,
             isComplete: true
         });
         expect(table.frameScores[9]).toEqual({
-            tries: [FrameTryEnum.Strike, FrameTryEnum.Strike, 9],
+            tries: [TrySpecialSymbol.Strike, TrySpecialSymbol.Strike, 9],
             score: 10 + 10 + 9,
             isComplete: true
         });

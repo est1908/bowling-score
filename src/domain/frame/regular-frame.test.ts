@@ -1,4 +1,4 @@
-import { FrameTryEnum } from '../types';
+import { TrySpecialSymbol } from '../types';
 import { RegularFrame } from './regular-frame';
 
 describe('regular frame', () => {
@@ -7,7 +7,7 @@ describe('regular frame', () => {
             const frame = createFrame();
 
             expect(frame.triesCount).toBe(0);
-            expect(frame.tries).toEqual([FrameTryEnum.None, FrameTryEnum.None]);
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.None, TrySpecialSymbol.None]);
             expect(frame.pinsAvailable).toBe(10);
             expect(frame.isSpare).toBeFalsy();
             expect(frame.isStrike).toBeFalsy();
@@ -18,9 +18,8 @@ describe('regular frame', () => {
             frame.add(0);
 
             expect(frame.triesCount).toBe(1);
-            expect(frame.tries).toEqual([0, FrameTryEnum.None]);
+            expect(frame.tryDisplayInfos).toEqual([0, TrySpecialSymbol.None]);
             expect(frame.pinsAvailable).toBe(10);
-            expect(frame.getTry(0)).toBe(0);
             expect(frame.isSpare).toBeFalsy();
             expect(frame.isStrike).toBeFalsy();
             expect(frame.isComplete).toBeFalsy();
@@ -31,7 +30,7 @@ describe('regular frame', () => {
             frame.add(5);
 
             expect(frame.triesCount).toBe(1);
-            expect(frame.tries).toEqual([5, FrameTryEnum.None]);
+            expect(frame.tryDisplayInfos).toEqual([5, TrySpecialSymbol.None]);
             expect(frame.pinsAvailable).toBe(5);
         });
 
@@ -41,10 +40,8 @@ describe('regular frame', () => {
             frame.add(3);
 
             expect(frame.triesCount).toBe(2);
-            expect(frame.tries).toEqual([2, 3]);
+            expect(frame.tryDisplayInfos).toEqual([2, 3]);
             expect(frame.pinsAvailable).toBe(0);
-            expect(frame.getTry(0)).toBe(2);
-            expect(frame.getTry(1)).toBe(3);
             expect(frame.isComplete).toBeTruthy();
         });
 
@@ -54,10 +51,8 @@ describe('regular frame', () => {
             frame.add(10);
 
             expect(frame.triesCount).toBe(2);
-            expect(frame.tries).toEqual([0, FrameTryEnum.Spare]);
+            expect(frame.tryDisplayInfos).toEqual([0, TrySpecialSymbol.Spare]);
             expect(frame.pinsAvailable).toBe(0);
-            expect(frame.getTry(0)).toBe(0);
-            expect(frame.getTry(1)).toBe(10);
             expect(frame.isSpare).toBeTruthy();
             expect(frame.isStrike).toBeFalsy();
         });
@@ -69,7 +64,7 @@ describe('regular frame', () => {
             frame.reset();
 
             expect(frame.triesCount).toBe(0);
-            expect(frame.tries).toEqual([FrameTryEnum.None, FrameTryEnum.None]);
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.None, TrySpecialSymbol.None]);
             expect(frame.pinsAvailable).toBe(10);
             expect(frame.isSpare).toBeFalsy();
             expect(frame.isStrike).toBeFalsy();
@@ -82,15 +77,15 @@ describe('regular frame', () => {
 
             expect(frame.triesCount).toBe(2);
             expect(frame.pinsAvailable).toBe(0);
-            expect(frame.getTry(0)).toBe(5);
-            expect(frame.getTry(1)).toBe(5);
+            expect(frame.tryDisplayInfos).toEqual([5, TrySpecialSymbol.Spare]);
             expect(frame.isSpare).toBeTruthy();
         });
 
         it('should accept strike (10, )', () => {
             const frame = createFrame();
             frame.add(10);
-            expect(frame.tries).toEqual([FrameTryEnum.Strike, FrameTryEnum.None]);
+            // yeeh this is strange thing... we should show strike in the second frame :)
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.None, TrySpecialSymbol.Strike]);
             expect(frame.isSpare).toBeFalsy();
             expect(frame.isStrike).toBeTruthy();
             expect(frame.isComplete).toBeTruthy();
@@ -158,14 +153,6 @@ describe('regular frame', () => {
             expect(frame.pinsAvailable).toBe(5);
             expect(() => frame.add(8)).toThrow();
         });
-
-        it('getTry should throw exceptions if index is invalid', () => {
-            const frame = createFrame();
-            frame.add(5);
-
-            expect(() => frame.getTry(1)).toThrow();
-        });
-
         test('should have maximum two attempts', () => {
             const frame = createFrame();
             frame.add(0);

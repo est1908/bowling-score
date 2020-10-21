@@ -2,6 +2,11 @@ import { MAX_PINS_COUNT } from '..';
 import { Frame} from './frame';
 
 export class LastFrame extends Frame {
+
+    public get frameMaxTries(): number {
+        return 3;
+    }
+
     public get isComplete(): boolean {
         if (this.triesCount < 2) {
             return false;

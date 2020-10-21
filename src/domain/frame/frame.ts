@@ -1,4 +1,4 @@
-import { FrameTry, FrameTryEnum, MAX_PINS_COUNT } from '../types';
+import { TryDisplaySymbol, TrySpecialSymbol, MAX_PINS_COUNT } from '../types';
 
 
 export abstract class Frame {
@@ -7,6 +7,7 @@ export abstract class Frame {
 
     public abstract get isComplete(): boolean;
     public abstract get pinsAvailable(): number;
+    public abstract get frameMaxTries(): number;
     public abstract getScore(): number | null;
     
     public get triesCount(): number {
@@ -18,18 +19,11 @@ export abstract class Frame {
     }
 
     public get lastTry(): number {
-        return this.getTry(this.triesCount - 1);
+        return this._tries[this._tries.length - 1];
     }
 
-    public get tries(): FrameTry[] {
-        return this.calculateTries();
-    }
-
-    public getTry(index: number): number {
-        if (index < 0 || index >= this._tries.length) {
-            throw Error('Invalid try index');
-        }
-        return this._tries[index];
+    public get tryDisplayInfos(): TryDisplaySymbol[] {
+        return this.calculateTryDisplayInfos();
     }
 
     public add(pins: number): void {
@@ -73,22 +67,22 @@ export abstract class Frame {
         return sum + nextTriesSum;
     }
 
-    private calculateTries() {
+    private calculateTryDisplayInfos() {
         const res = [];
         for (let i = 0; i < this._tries.length; i++) {
             const curTry = this._tries[i];
             if (i > 0 && curTry > 0 && this._tries[i - 1] + curTry === MAX_PINS_COUNT) {
-                res.push(FrameTryEnum.Spare);
+                res.push(TrySpecialSymbol.Spare);
             } else if (curTry === MAX_PINS_COUNT) {
-                res.push(FrameTryEnum.Strike);
+                res.push(TrySpecialSymbol.Strike);
             } else {
                 res.push(curTry);
             }
         }
         // fill with none values
-        if (res.length < 2) {
-            for (let i = res.length; i < 2; i++) {
-                res.push(FrameTryEnum.None);
+        if (res.length < this.frameMaxTries) {
+            for (let i = res.length; i < this.frameMaxTries; i++) {
+                res.push(TrySpecialSymbol.None);
             }
         }
         return res;

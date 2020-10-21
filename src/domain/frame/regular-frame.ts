@@ -14,6 +14,10 @@ export class RegularFrame extends Frame {
         return this.isStrike || this._tries.length == 2;
     }
 
+    public get frameMaxTries(): number {
+        return 2;
+    }
+
     public get pinsAvailable(): number {
         if (this.triesCount == 0) {
             return MAX_PINS_COUNT;

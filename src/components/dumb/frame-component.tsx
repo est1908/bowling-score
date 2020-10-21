@@ -1,19 +1,19 @@
 import React from 'react';
-import { FrameTry, FrameTryEnum } from '../../domain/types';
+import { TryDisplaySymbol, TrySpecialSymbol } from '../../domain/types';
 
 type Props = {
-    tries: FrameTry[];
+    tries: TryDisplaySymbol[];
     score: number | null;
 };
 
 export default function Frame(props: Props) {
-    function renderFrameStr(frameTry: FrameTry): string {
+    function renderFrameStr(frameTry: TryDisplaySymbol): string {
         switch (frameTry) {
-            case FrameTryEnum.None:
+            case TrySpecialSymbol.None:
                 return '';
-            case FrameTryEnum.Spare:
+            case TrySpecialSymbol.Spare:
                 return '/';
-            case FrameTryEnum.Strike:
+            case TrySpecialSymbol.Strike:
                 return 'x';
             default:
                 return frameTry.toString();

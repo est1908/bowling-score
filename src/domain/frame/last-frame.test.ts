@@ -1,4 +1,4 @@
-import { FrameTryEnum } from '..';
+import { TrySpecialSymbol } from '..';
 import { LastFrame } from './last-frame';
 
 describe('last frame', () => {
@@ -6,13 +6,14 @@ describe('last frame', () => {
 
         it('should be initialized properly', () => {
             const frame = createFrame();
-
             expect(frame.triesCount).toBe(0);
-            expect(frame.tries).toEqual([FrameTryEnum.None, FrameTryEnum.None, FrameTryEnum.None]);
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.None, TrySpecialSymbol.None, TrySpecialSymbol.None]);
             expect(frame.pinsAvailable).toBe(10);
             expect(frame.isComplete).toBeFalsy();
         });
 
+        //todo: add shadow to fields
+        //todo: add shadow to next cell
         //todo: next step to move strike
         //todo: remove get try
         it('should allow 2 attempts unless strike or spare', () => {
@@ -20,8 +21,7 @@ describe('last frame', () => {
             frame.add(1);
             frame.add(5);
             expect(frame.triesCount).toBe(2);
-            expect(frame.getTry(0)).toBe(1);
-            expect(frame.getTry(1)).toBe(5);
+            expect(frame.tryDisplayInfos).toEqual([0, 5, TrySpecialSymbol.None]);
             expect(frame.isComplete).toBeTruthy();
         });
         it('should allow 3 attempts due to spare', () => {
@@ -32,9 +32,7 @@ describe('last frame', () => {
             expect(frame.pinsAvailable).toBe(5);
             frame.add(2);
             expect(frame.triesCount).toBe(3);
-            expect(frame.getTry(0)).toBe(10);
-            expect(frame.getTry(1)).toBe(5);
-            expect(frame.getTry(2)).toBe(2);
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.Strike, 5, 2]);
             expect(frame.isComplete).toBeTruthy();
         });
 
@@ -46,9 +44,7 @@ describe('last frame', () => {
             expect(frame.pinsAvailable).toBe(10);
             frame.add(10);
             expect(frame.triesCount).toBe(3);
-            expect(frame.getTry(0)).toBe(10);
-            expect(frame.getTry(1)).toBe(10);
-            expect(frame.getTry(2)).toBe(10);
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.Strike, TrySpecialSymbol.Strike, TrySpecialSymbol.Strike]);
             expect(frame.isComplete).toBeTruthy();
         });
 
@@ -59,10 +55,24 @@ describe('last frame', () => {
             expect(frame.pinsAvailable).toBe(10);
             frame.add(0);
             expect(frame.triesCount).toBe(3);
-            expect(frame.getTry(0)).toBe(10);
-            expect(frame.getTry(1)).toBe(10);
-            expect(frame.getTry(2)).toBe(0);
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.Strike, TrySpecialSymbol.Strike, 0]);
             expect(frame.isComplete).toBeTruthy();
+        });
+
+        it('should allow spare and strike', () => {
+            const frame = createFrame();
+            frame.add(1);
+            frame.add(9);
+            frame.add(10);
+            expect(frame.tryDisplayInfos).toEqual([1, TrySpecialSymbol.Spare, TrySpecialSymbol.Strike]);
+        });
+
+        it('should allow strike and spare', () => {
+            const frame = createFrame();
+            frame.add(10);
+            frame.add(9);
+            frame.add(1);
+            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.Strike, 9, TrySpecialSymbol.Spare]);
         });
     });
 

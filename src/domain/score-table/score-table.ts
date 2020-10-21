@@ -30,7 +30,7 @@ export class ScoreTableDefault implements ScoreTable {
 
     get frameScores(): FrameScore[] {
         return this._frames.map((curFrame, i) => ({
-            tries: curFrame.tries,
+            tries: curFrame.tryDisplayInfos,
             isComplete: curFrame.isComplete,
             score: curFrame.getScore()
         }));
