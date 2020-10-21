@@ -26,7 +26,7 @@ button {
     border-radius: $space;
     user-select: none;
     line-height: 1.5;
-    padding: 2*$space 4*$space;
+    padding: 2 * $space 4 * $space;
     //outline: none;
     border: none;
 
@@ -40,4 +40,3 @@ button {
         color: $button-disabled-text-color;
     }
 }
-

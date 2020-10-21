@@ -155,7 +155,6 @@ describe('Score table', () => {
         expect(table.totalScore).toBe(300);
     });
 
-
     function createTable() {
         return new ScoreTableDefault();
     }

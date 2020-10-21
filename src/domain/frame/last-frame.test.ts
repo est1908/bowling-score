@@ -3,11 +3,14 @@ import { LastFrame } from './last-frame';
 
 describe('last frame', () => {
     describe('positive cases', () => {
-
         it('should be initialized properly', () => {
             const frame = createFrame();
             expect(frame.triesCount).toBe(0);
-            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.None, TrySpecialSymbol.None, TrySpecialSymbol.None]);
+            expect(frame.tryDisplayInfos).toEqual([
+                TrySpecialSymbol.None,
+                TrySpecialSymbol.None,
+                TrySpecialSymbol.None
+            ]);
             expect(frame.pinsAvailable).toBe(10);
             expect(frame.isComplete).toBeFalsy();
         });
@@ -44,7 +47,11 @@ describe('last frame', () => {
             expect(frame.pinsAvailable).toBe(10);
             frame.add(10);
             expect(frame.triesCount).toBe(3);
-            expect(frame.tryDisplayInfos).toEqual([TrySpecialSymbol.Strike, TrySpecialSymbol.Strike, TrySpecialSymbol.Strike]);
+            expect(frame.tryDisplayInfos).toEqual([
+                TrySpecialSymbol.Strike,
+                TrySpecialSymbol.Strike,
+                TrySpecialSymbol.Strike
+            ]);
             expect(frame.isComplete).toBeTruthy();
         });
 

@@ -22,7 +22,9 @@ export class LastFrame extends Frame {
             return 0;
         }
         const lastStrike = this.lastTry == MAX_PINS_COUNT;
-        const lastSpare = this._tries.length > 1 && (this._tries[this._tries.length - 1] + this._tries[this._tries.length - 2]) == MAX_PINS_COUNT;
+        const lastSpare =
+            this._tries.length > 1 &&
+            this._tries[this._tries.length - 1] + this._tries[this._tries.length - 2] == MAX_PINS_COUNT;
         return lastStrike || lastSpare ? MAX_PINS_COUNT : MAX_PINS_COUNT - this.lastTry;
     }
 

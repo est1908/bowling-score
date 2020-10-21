@@ -6,11 +6,13 @@ Online bowling score calculator for [Ten-pin bowling](https://en.wikipedia.org/w
 **x** - means Strike
 
 Te
+
 # Project structure
 
 Application is devided by 2 layer
- - Domain layer (Domain logic + tests).
- - View layer (React, components, styles, assets)
+
+-   Domain layer (Domain logic + tests).
+-   View layer (React, components, styles, assets)
 
 Domain folder contains app logic isolated from framework. Also interfaces in domain/types.ts used to isolate implemention details from view layer
 
@@ -19,14 +21,14 @@ Domain folder contains app logic isolated from framework. Also interfaces in dom
 
 # TODO:
 
-- accessibility
+-   accessibility
 
-- sort-imports ?!
+-   sort-imports ?!
 -   tslint
 -   build script
     -deploy to bowling-score.est1908.club
 -   method ordering (by access level)
-- write doc
+-   write doc
 
 # Some comments
 
