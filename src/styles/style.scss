@@ -8,8 +8,8 @@ body {
 
 body {
     font-family: 'Roboto', 'Helvetica Neue', sans-serif;
-    color: $black-color;
     background-color: $background-color;
+    color: $text-color;
 }
 
 #root {
@@ -40,10 +40,9 @@ button {
     }
 
     &:disabled {
+        cursor: default;
         background-color: $button-disabled-background-color;
         color: $button-disabled-text-color;
     }
 }
 
-@import '_components';
-@import '_utilities';

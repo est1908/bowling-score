@@ -9,7 +9,6 @@
     "author": "Artem Kireev",
     "license": "ISC",
     "dependencies": {
-        "classnames": "^2.2.6",
         "react": "^16.14.0",
         "react-dom": "^16.14.0",
         "reset-css": "^5.0.1"

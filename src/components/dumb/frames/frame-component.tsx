@@ -1,5 +1,6 @@
 import React from 'react';
-import { TryDisplaySymbol, TrySpecialSymbol } from '../../domain/types';
+import { TryDisplaySymbol, TrySpecialSymbol } from '../../../domain/types';
+import './frames.scss';
 
 type Props = {
     tries: TryDisplaySymbol[];
@@ -7,14 +8,20 @@ type Props = {
 };
 
 export default function Frame(props: Props) {
-    function renderFrameStr(frameTry: TryDisplaySymbol): string {
+    function renderTry(frameTry: TryDisplaySymbol) {
         switch (frameTry) {
             case TrySpecialSymbol.None:
                 return '';
+            case 0:
+                return '-';
             case TrySpecialSymbol.Spare:
-                return '/';
+                return (
+                    <span className="frame__spare" title="SPARE!">
+                        /
+                    </span>
+                );
             case TrySpecialSymbol.Strike:
-                return 'x';
+                return <span className="frame__strike">x</span>;
             default:
                 return frameTry.toString();
         }
@@ -25,10 +32,11 @@ export default function Frame(props: Props) {
             <div className="frame__tries">
                 {props.tries.map((x, i) => (
                     <div className="frame__try" key={i}>
-                        {renderFrameStr(x)}
+                        {renderTry(x)}
                     </div>
                 ))}
             </div>
+            <div className="frame__score">{props.score}</div>
         </div>
     );
 }

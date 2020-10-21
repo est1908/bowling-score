@@ -12,6 +12,7 @@ export interface ScoreTable {
 export interface FrameScore {
     tries: TryDisplaySymbol[];
     score: number | null;
+    accumulatedScore: number | null;  // frame score + all of former frames score
     isComplete: boolean;
 }
 

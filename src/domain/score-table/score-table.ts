@@ -29,16 +29,27 @@ export class ScoreTableDefault implements ScoreTable {
     }
 
     get frameScores(): FrameScore[] {
-        return this._frames.map((curFrame, i) => ({
-            tries: curFrame.tryDisplayInfos,
-            isComplete: curFrame.isComplete,
-            score: curFrame.calculateScore()
-        }));
+        // i use forEach because is more readable here than reduce version
+        const res: FrameScore[] = [];
+        let scoresAccumulator = 0;
+
+        this._frames.forEach((curFrame) => {
+            const score = curFrame.calculateScore();
+            const frameScore: FrameScore = {
+                tries: curFrame.tryDisplayInfos,
+                isComplete: curFrame.isComplete,
+                score: score,
+                accumulatedScore: score !== null ? score + scoresAccumulator : null
+            };
+            res.push(frameScore);
+            scoresAccumulator += score !== null ? score : 0;
+        });
+        return res;
     }
 
     constructor() {
         for (let i = FRAMES_COUNT - 1; i >= 0; i--) {
-            const frame = i == FRAMES_COUNT - 1 ? new LastFrame() : new RegularFrame(this._frames[i+1]);
+            const frame = i == FRAMES_COUNT - 1 ? new LastFrame() : new RegularFrame(this._frames[i + 1]);
             this._frames[i] = frame;
         }
     }

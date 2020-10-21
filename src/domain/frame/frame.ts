@@ -1,4 +1,4 @@
-import { TryDisplaySymbol, TrySpecialSymbol, MAX_PINS_COUNT } from '../types';
+import { TryDisplaySymbol, MAX_PINS_COUNT } from '../types';
 
 
 export abstract class Frame {

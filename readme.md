@@ -1,5 +1,9 @@
 # Project structure
 
+Application is devided by 2 layer
+ - Domain layer (Domain logic + tests).
+ - View layer (React, components, styles, assets)
+
 Domain folder contains app logic isolated from framework. Also interfaces in domain/types.ts used to isolate implemention details from view layer
 
 -   Domain
@@ -13,6 +17,7 @@ Domain folder contains app logic isolated from framework. Also interfaces in dom
 - spare
 - adaptive
 - last cell
+- sort-imports ?!
 - score
 -   tslint
 -   css animatiomns

@@ -9,6 +9,7 @@ describe('Score table', () => {
         expect(table.frameScores[0]).toEqual({
             tries: [TrySpecialSymbol.None, TrySpecialSymbol.None],
             score: null,
+            accumulatedScore: null,
             isComplete: false
         });
     });
@@ -21,6 +22,7 @@ describe('Score table', () => {
         expect(table.frameScores[0]).toEqual({
             tries: [9, TrySpecialSymbol.None],
             score: null,
+            accumulatedScore: null,
             isComplete: false
         });
     });
@@ -34,6 +36,7 @@ describe('Score table', () => {
         expect(table.frameScores[0]).toEqual({
             tries: [2, 3],
             score: 5,
+            accumulatedScore: 5,
             isComplete: true
         });
     });
@@ -47,6 +50,7 @@ describe('Score table', () => {
         expect(table.frameScores[0]).toEqual({
             tries: [0, 0],
             score: 0,
+            accumulatedScore: 0,
             isComplete: true
         });
     });
@@ -63,12 +67,14 @@ describe('Score table', () => {
         expect(table.frameScores[0]).toEqual({
             tries: [2, 7],
             score: 9,
+            accumulatedScore: 9,
             isComplete: true
         });
         expect(table.isGameFinished).toBeFalsy();
         expect(table.frameScores[1]).toEqual({
             tries: [3, TrySpecialSymbol.None],
             score: null,
+            accumulatedScore: null,
             isComplete: false
         });
     });
@@ -85,11 +91,13 @@ describe('Score table', () => {
         expect(table.frameScores[0]).toEqual({
             tries: [2, 7],
             score: 9,
+            accumulatedScore: 9,
             isComplete: true
         });
         expect(table.frameScores[9]).toEqual({
             tries: [2, 7, TrySpecialSymbol.None],
             score: 9,
+            accumulatedScore: 10 * (2 + 7),
             isComplete: true
         });
     });
@@ -114,24 +122,39 @@ describe('Score table', () => {
         expect(table.frameScores[0]).toEqual({
             tries: [2, 7],
             score: 9,
+            accumulatedScore: 9,
             isComplete: true
         });
         expect(table.frameScores[7]).toEqual({
             tries: [2, 7],
             score: 2 + 7,
+            accumulatedScore: 7 * (2 + 7) + 2 + 7,
             isComplete: true
         });
         expect(table.frameScores[8]).toEqual({
             tries: [TrySpecialSymbol.None, TrySpecialSymbol.Strike],
             score: 10 + 10 + 10,
+            accumulatedScore: 8 * (2 + 7) + 10 + 10 + 10,
             isComplete: true
         });
         expect(table.frameScores[9]).toEqual({
             tries: [TrySpecialSymbol.Strike, TrySpecialSymbol.Strike, 9],
             score: 10 + 10 + 9,
+            accumulatedScore: 8 * (2 + 7) + 10 + 10 + 10 + 10 + 10 + 9,
             isComplete: true
         });
     });
+
+    it('should allow to win game with score 300', () => {
+        const table = createTable();
+        // 9 strikes + 3 in the last frame
+        for (let i = 0; i < 9 + 3; i++) {
+            table.add(10);
+        }
+        expect(table.isGameFinished).toBeTruthy();
+        expect(table.totalScore).toBe(300);
+    });
+
 
     function createTable() {
         return new ScoreTableDefault();
