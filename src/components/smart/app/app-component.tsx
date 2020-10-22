@@ -1,8 +1,9 @@
-import ActionButtons, { ActionButtonCode } from '../../dumb/action-buttons/action-buttons-component';
+import ActionButtons from '../../dumb/action-buttons/action-buttons-component';
 import React, { Component } from 'react';
 import ScoreTableComponent from '../../dumb/score-table/score-table-component';
 import { FrameScore, MAX_PINS_COUNT, ScoreTable } from '../../../domain';
 import './app.scss';
+import { ActionButtonCode } from '../../dumb/action-buttons/action-button-codes';
 
 type Props = {
     scoreTable: ScoreTable;
