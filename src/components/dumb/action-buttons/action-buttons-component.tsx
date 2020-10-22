@@ -1,6 +1,6 @@
+import ActionButton from './action-button-component';
 import React from 'react';
 import { ActionButtonCode } from './action-button-codes';
-import ActionButton from './action-button-component';
 import './action-buttons.scss';
 
 type Props = {

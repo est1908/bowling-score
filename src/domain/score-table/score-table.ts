@@ -1,5 +1,5 @@
 import { Frame } from '../frame/frame';
-import { IFrameScore, FRAMES_COUNT, IScoreTable } from '../types';
+import { FRAMES_COUNT, IFrameScore, IScoreTable } from '../types';
 
 export class ScoreTable implements IScoreTable {
     private readonly _frames: Frame[] = Array(FRAMES_COUNT);

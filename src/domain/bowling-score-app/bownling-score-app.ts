@@ -1,7 +1,7 @@
 import { Frame } from '../frame/frame';
-import { FRAMES_COUNT, IScoreTable, IBowlingScoreApp } from '../types';
-import { RegularFrame } from '../frame/regular-frame';
+import { FRAMES_COUNT, IBowlingScoreApp, IScoreTable } from '../types';
 import { LastFrame } from '../frame/last-frame';
+import { RegularFrame } from '../frame/regular-frame';
 import { ScoreTable } from '../score-table/score-table';
 
 export class BowlingScoreApp implements IBowlingScoreApp {

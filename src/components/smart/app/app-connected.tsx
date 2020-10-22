@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { IBowlingScoreApp, IFrameScore } from '../../../domain';
 import { ActionButtonCode } from 'components/dumb/action-buttons/action-button-codes';
 import { App } from 'components/dumb/app/app-component';
+import { IBowlingScoreApp, IFrameScore } from '../../../domain';
 
 type Props = {
     bowlingScore: IBowlingScoreApp;

@@ -1,8 +1,8 @@
 import cls from 'classnames';
 import React from 'react';
 import { TryDisplaySymbol, TrySpecialSymbol } from '../../../domain';
-
 import './frame.scss';
+
 
 type Props = {
     tries: TryDisplaySymbol[];

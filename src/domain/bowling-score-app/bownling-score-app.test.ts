@@ -1,5 +1,5 @@
-import { TrySpecialSymbol } from '../types';
 import { BowlingScoreApp } from './bownling-score-app';
+import { TrySpecialSymbol } from '../types';
 
 describe('Bowling score app', () => {
     it('should be initialized properly', () => {
