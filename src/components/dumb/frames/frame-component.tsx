@@ -9,7 +9,7 @@ type Props = {
     highlighted: boolean;
 };
 
-export default function Frame(props: Props) {
+function Frame(props: Props) {
     function renderTry(frameTry: TryDisplaySymbol) {
         switch (frameTry) {
             case TrySpecialSymbol.None:
@@ -42,3 +42,6 @@ export default function Frame(props: Props) {
         </div>
     );
 }
+
+// Memorize it due to not often changes
+export default React.memo(Frame);
