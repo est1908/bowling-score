@@ -1,2 +1,2 @@
 export * from './types';
-export { ScoreTableDefault } from './score-table-default/score-table-default';
+export { BowlingScoreApp } from './bowling-score-app/bownling-score-app';

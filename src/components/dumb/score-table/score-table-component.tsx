@@ -1,12 +1,12 @@
 import cls from 'classnames';
 import React from 'react';
-import { FrameScore } from '../../../domain';
+import { IFrameScore } from '../../../domain';
 import { Frame } from '../frame';
 import { TotalScoreFrame } from '../total-score-frame';
 import './score-table.scss';
 
 type Props = {
-    frameScores: FrameScore[];
+    frameScores: IFrameScore[];
     currentFrameIndex: number | null;
     totalScore: number;
     pinsAvailable: number;

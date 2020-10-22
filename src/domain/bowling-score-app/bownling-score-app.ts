@@ -1,15 +1,16 @@
 import { Frame } from '../frame/frame';
-import { FrameScore, ScoreTable } from '../types';
-import { LastFrame, RegularFrame } from '../frame/index';
+import { FRAMES_COUNT, IScoreTable, IBowlingScoreApp } from '../types';
+import { RegularFrame } from '../frame/regular-frame';
+import { LastFrame } from '../frame/last-frame';
+import { ScoreTable } from '../score-table/score-table';
 
-export const FRAMES_COUNT = 10;
-
-export class ScoreTableDefault implements ScoreTable {
+export class BowlingScoreApp implements IBowlingScoreApp {
     private readonly _frames: Frame[] = Array(FRAMES_COUNT);
     private _currentFrameIndex = 0;
+    private _scoreTable: ScoreTable;
 
-    get totalScore(): number {
-        return this._frames.reduce((accumulator, curFrame) => accumulator + (curFrame.calculateScore() || 0), 0);
+    get scoreTable(): IScoreTable {
+        return this._scoreTable;
     }
 
     get currentFrameIndex(): number {
@@ -32,31 +33,13 @@ export class ScoreTableDefault implements ScoreTable {
         return this.currentFrameIndex > 0 || this.currentFrame.triesCount > 0;
     }
 
-    get frameScores(): FrameScore[] {
-        // i use forEach because is more readable here than reduce version
-        const res: FrameScore[] = [];
-        let scoresAccumulator = 0;
-
-        this._frames.forEach((curFrame) => {
-            const score = curFrame.calculateScore();
-            const frameScore: FrameScore = {
-                tries: curFrame.tryDisplayInfos,
-                isComplete: curFrame.isComplete,
-                accumulatedScore: score !== null ? score + scoresAccumulator : null,
-                score
-            };
-            res.push(frameScore);
-            scoresAccumulator += score !== null ? score : 0;
-        });
-        return res;
-    }
-
     constructor() {
         this._frames[FRAMES_COUNT - 1] = new LastFrame();
         for (let i = FRAMES_COUNT - 2; i >= 0; i--) {
             const frame = new RegularFrame(this._frames[i + 1]);
             this._frames[i] = frame;
         }
+        this._scoreTable = new ScoreTable(this._frames);
     }
 
     add(pins: number): void {

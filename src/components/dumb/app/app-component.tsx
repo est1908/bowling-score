@@ -1,12 +1,12 @@
 import ActionButtons from '../../dumb/action-buttons/action-buttons-component';
 import React, { useEffect } from 'react';
 import ScoreTableComponent from '../../dumb/score-table/score-table-component';
-import { FrameScore, MAX_PINS_COUNT } from '../../../domain';
+import { IFrameScore, MAX_PINS_COUNT } from '../../../domain';
 import './app.scss';
 import { ActionButtonCode } from '../../dumb/action-buttons/action-button-codes';
 
 type Props = {
-    frameScores: FrameScore[];
+    frameScores: IFrameScore[];
     currentFrameIndex: number;
     totalScore: number;
     pinsAvailable: number;

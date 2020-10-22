@@ -1,19 +1,24 @@
 export const MAX_PINS_COUNT = 10;
+export const FRAMES_COUNT = 10;
 
-export interface ScoreTable {
-    frameScores: FrameScore[];
-    totalScore: number;
+export interface IBowlingScoreApp {
+    scoreTable: IScoreTable;
     currentFrameIndex: number;
-    isUndoAvailable: boolean;
-    isGameFinished: boolean;
-    pinsAvailable: number;
     add(pins: number): void;
     isInputValid(pins: number): boolean;
-    undo(): void;
+    isUndoAvailable: boolean;
+    pinsAvailable: number;
+    isGameFinished: boolean;
     reset(): void;
+    undo(): void;
 }
 
-export interface FrameScore {
+export interface IScoreTable {
+    frameScores: IFrameScore[];
+    totalScore: number;
+}
+
+export interface IFrameScore {
     tries: TryDisplaySymbol[];
     score: number | null;
     accumulatedScore: number | null; // current frame score + sum of previous frames score
