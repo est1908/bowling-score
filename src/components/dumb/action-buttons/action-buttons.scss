@@ -15,7 +15,6 @@
 
 @media only screen and (min-width: $mobile-breakpoint) {
     .action-buttons {
-        //grid-gap: 6 * $space;
         grid-template-columns: repeat(12, 42px);
         grid-template-rows: repeat(1, 42px);
     }
