@@ -82,13 +82,17 @@ export function App(props: Props) {
         );
     }
 
-    //TODO: Fix type here
-    function handleKeyDown(e: any) {
+    function handleKeyDown(e: KeyboardEvent) {
+        // pin numbers
         if (e.key >= '0' && e.key <= '9') {
             const pins = parseInt(e.key, 10);
             props.onAction(pins);
+        } else if (e.key === 'x' || e.key === '/') {
+            // strike or spare
+            props.onAction(e.key);
+        } else if (e.key === 'u') {
+            props.onUndo();
         }
-        //TODO: add x / u
     }
 
     return (
