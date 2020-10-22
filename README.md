@@ -16,6 +16,8 @@ Application consists of 2 layers:
 -   **Domain Layer** (Domain logic, tests) contains isolated app logic.
 -   **View Layer** (React components, styles, assets) provides UI. Less coupled with Domain Layer via interfaces defined in `domain/types.ts`
 
+For style isolation i chose [BEM](https://en.bem.info/methodology/quick-start/) approach.
+
 # Setup instructions
 
 ```bash

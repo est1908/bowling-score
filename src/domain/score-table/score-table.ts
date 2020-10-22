@@ -28,6 +28,10 @@ export class ScoreTableDefault implements ScoreTable {
         return this.currentFrame.pinsAvailable;
     }
 
+    get isUndoAvailable(): boolean {
+        return this.currentFrameIndex > 0 || this.currentFrame.triesCount > 0;
+    }
+
     get frameScores(): FrameScore[] {
         // i use forEach because is more readable here than reduce version
         const res: FrameScore[] = [];

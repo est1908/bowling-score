@@ -15,6 +15,7 @@ type State = {
     pinsAvailable: number;
     statusText: string;
     isGameFinished: boolean;
+    isUndoAvailable: boolean;
 };
 
 function getStatusText(scoreTable: ScoreTable): string {
@@ -32,6 +33,7 @@ function mapToState(scoreTable: ScoreTable): State {
         totalScore: scoreTable.totalScore,
         pinsAvailable: scoreTable.pinsAvailable,
         isGameFinished: scoreTable.isGameFinished,
+        isUndoAvailable: scoreTable.isUndoAvailable,
         statusText: getStatusText(scoreTable)
     };
 }
@@ -48,9 +50,10 @@ export default class App extends Component<Props, State> {
                 <h1 className="app-container__title">Bowling score calculator</h1>
                 <div className="app-container__score-table">{this.renderScoreTable()}</div>
                 <div className="app-container__action-buttons">{this.renderActionButtons()}</div>
-                <button className="app-container__btn-new-game" onClick={this.handleNewGame}>
-                    New Game
-                </button>
+                <div className="app-container__bottom_buttons">
+                    {this.renderNewButton()}
+                    {this.renderUndoButton()}
+                </div>
             </div>
         );
     }
@@ -83,6 +86,26 @@ export default class App extends Component<Props, State> {
         );
     }
 
+    renderNewButton() {
+        return (
+            <button className="app-container__btn-new-game" onClick={this.handleNewGame}>
+                New
+            </button>
+        );
+    }
+
+    renderUndoButton() {
+        return (
+            <button
+                className="app-container__btn-undo"
+                disabled={!this.state.isUndoAvailable}
+                onClick={this.handleUndo}
+            >
+                ↩
+            </button>
+        );
+    }
+
     handleAddPins = (btnCode: ActionButtonCode) => {
         const pins = this.buttonCodeToPins(btnCode);
         this.props.scoreTable.add(pins);
@@ -91,6 +114,11 @@ export default class App extends Component<Props, State> {
 
     handleNewGame = () => {
         this.props.scoreTable.reset();
+        this.updateState();
+    };
+
+    handleUndo = () => {
+        this.props.scoreTable.undo();
         this.updateState();
     };
 

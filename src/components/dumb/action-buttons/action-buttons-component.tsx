@@ -21,6 +21,7 @@ export default function ActionButtons(props: Props) {
         return x <= props.maxNumber;
     }
 
+    // tood: extract and memorize
     function renderButton(actBtnCode: ActionButtonCode) {
         function handleClick() {
             props.onClick(actBtnCode);

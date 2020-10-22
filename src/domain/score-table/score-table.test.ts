@@ -180,6 +180,15 @@ describe('Score table', () => {
         expect(table.totalScore).toBe(1 + 4);
     });
 
+    it('allow undo from initial state', () => {
+        const table = createTable();
+        table.undo();
+        table.undo();
+        table.undo();
+        expect(table.currentFrameIndex).toBe(0);
+        expect(table.totalScore).toBe(0);
+    });
+
     function createTable() {
         return new ScoreTableDefault();
     }

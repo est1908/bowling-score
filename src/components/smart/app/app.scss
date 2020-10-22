@@ -32,9 +32,42 @@
         margin-bottom: 2 * $space;
     }
 
-    &__btn-new-game {
+    &__bottom_buttons {
         margin-top: 8 * $space;
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-gap: 4 * $space;
+        grid-template-columns: repeat(6, 42px);
+        grid-template-rows: repeat(1, 42px);
+    }
+
+    &__btn-new-game {
+        grid-column: 3 / 5;
+        grid-row: 1;
+    }
+
+    &__btn-undo {
+        grid-column: 6 / -1;
+        grid-row: 1;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+    }
+}
+
+@media only screen and (min-width: $mobile-breakpoint) {
+    .app-container {
+        &__bottom_buttons {
+            grid-template-columns: repeat(12, 42px);
+        }
+
+        &__btn-new-game {
+            grid-column: 6 / 8;
+            grid-row: 1;
+        }
+    
+        &__btn-undo {
+            grid-column: 12 / -1;
+            grid-row: 1;
+        }
     }
 }

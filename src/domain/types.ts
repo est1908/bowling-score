@@ -3,10 +3,12 @@ export const MAX_PINS_COUNT = 10;
 export interface ScoreTable {
     frameScores: FrameScore[];
     totalScore: number;
-    pinsAvailable: number;
-    isGameFinished: boolean;
     currentFrameIndex: number;
+    isUndoAvailable: boolean;
+    isGameFinished: boolean;
+    pinsAvailable: number;
     add(pins: number): void;
+    undo(): void;
     reset(): void;
 }
 
