@@ -18,7 +18,7 @@ export default function ScoreTable(props: Props) {
         <div className={cls('score-table', { 'score-table_highlighted': props.isGameFinished })}>
             <div className="score-table__score-frames">
                 {props.frameScores.map((x, i) => (
-                    <div key={i} className="score-table__frame" title={`Score for frame ${i + 1}`}>
+                    <div key={`frame-${i}`} className="score-table__frame" title={`Score for frame ${i + 1}`}>
                         <Frame tries={x.tries} score={x.accumulatedScore} highlighted={i === props.currentFrameIndex} />
                     </div>
                 ))}

@@ -33,7 +33,7 @@ function Frame(props: Props) {
         <div className={cls('frame', { frame_highlighted: props.highlighted })}>
             <div className="frame__tries">
                 {props.tries.map((x, i) => (
-                    <div className="frame__try" key={i}>
+                    <div className="frame__try" key={`try-${i}`}>
                         {renderTry(x)}
                     </div>
                 ))}
