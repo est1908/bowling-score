@@ -52,8 +52,9 @@ export class ScoreTableDefault implements ScoreTable {
     }
 
     constructor() {
-        for (let i = FRAMES_COUNT - 1; i >= 0; i--) {
-            const frame = i === FRAMES_COUNT - 1 ? new LastFrame() : new RegularFrame(this._frames[i + 1]);
+        this._frames[FRAMES_COUNT - 1] = new LastFrame();
+        for (let i = FRAMES_COUNT - 2; i >= 0; i--) {
+            const frame = new RegularFrame(this._frames[i + 1]);
             this._frames[i] = frame;
         }
     }

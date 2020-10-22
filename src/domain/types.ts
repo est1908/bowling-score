@@ -1,10 +1,5 @@
 export const MAX_PINS_COUNT = 10;
 
-//todO; add index.ts encapsulat ecomponents
-// ScoreTable -> game <> app
-// PinsAvailble inside frame
-// вынести LastFrame из цикла
-// ScoreTableDefault
 export interface ScoreTable {
     frameScores: FrameScore[];
     totalScore: number;

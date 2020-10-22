@@ -1,4 +1,4 @@
-import { ScoreTableDefault } from './score-table';
+import { ScoreTableDefault } from './score-table-default';
 import { TrySpecialSymbol } from '../types';
 
 describe('Score table', () => {

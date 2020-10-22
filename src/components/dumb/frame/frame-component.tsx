@@ -1,7 +1,8 @@
 import cls from 'classnames';
 import React from 'react';
-import { TryDisplaySymbol, TrySpecialSymbol } from '../../../domain/types';
-import './frames.scss';
+import { TryDisplaySymbol, TrySpecialSymbol } from '../../../domain';
+
+import './frame.scss';
 
 type Props = {
     tries: TryDisplaySymbol[];
@@ -9,7 +10,7 @@ type Props = {
     highlighted: boolean;
 };
 
-function Frame(props: Props) {
+export const Frame = (props: Props) => {
     function renderTry(frameTry: TryDisplaySymbol) {
         switch (frameTry) {
             case TrySpecialSymbol.None:
@@ -18,12 +19,16 @@ function Frame(props: Props) {
                 return '-';
             case TrySpecialSymbol.Spare:
                 return (
-                    <span className="frame__spare" title="SPARE!">
+                    <span className="frame__spare" title="Spare">
                         /
                     </span>
                 );
             case TrySpecialSymbol.Strike:
-                return <span className="frame__strike">x</span>;
+                return (
+                    <span className="frame__strike" title="Strike">
+                        x
+                    </span>
+                );
             default:
                 return frameTry.toString();
         }
@@ -41,7 +46,7 @@ function Frame(props: Props) {
             <div className="frame__score">{props.score}</div>
         </div>
     );
-}
+};
 
 // Memorize it due to not often changes
-export default React.memo(Frame);
+export const FrameMemorized = React.memo(Frame);

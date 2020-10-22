@@ -3,7 +3,6 @@
     "rulesDirectory": ["tslint-plugin-prettier"],
     "rules": {
         "prettier": true,
-        "interface-name": false,
-        "no-submodule-imports": true
+        "interface-name": false
     }
 }

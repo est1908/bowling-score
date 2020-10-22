@@ -26,5 +26,5 @@
         // Include module source maps for debugging
         "sourceMap": true
     },
-   // "include": ["src"]
+    "include": ["src"]
 }
