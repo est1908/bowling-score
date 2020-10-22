@@ -27,7 +27,7 @@ export function App(props: Props) {
 
     function getStatusText(): string {
         if (!props.isGameFinished) {
-            return 'Please enter your current attempt result:';
+            return 'Your current attempt result:';
         } else {
             return `Game is finished. You score is ${props.totalScore}!`;
         }

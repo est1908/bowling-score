@@ -19,3 +19,10 @@
         grid-template-rows: repeat(1, 42px);
     }
 }
+
+@media only screen and (max-width: $small-mobile-breakpoint) {
+    .action-buttons {
+        grid-template-columns: repeat(4, 42px);
+        grid-template-rows: repeat(3, 42px);
+    }
+}

@@ -64,10 +64,27 @@
             grid-column: 6 / 8;
             grid-row: 1;
         }
-    
+
         &__btn-undo {
             grid-column: 12 / -1;
             grid-row: 1;
+        }
+    }
+}
+
+@media only screen and (max-width: $small-mobile-breakpoint) {
+    .app-container {
+        &__bottom_buttons {
+            grid-template-columns: repeat(4, 42px);
+            grid-template-rows: 42px
+        }
+
+        &__btn-new-game {
+            grid-column: 2 / 4;
+        }
+
+        &__btn-undo {
+            grid-column: 4 / -1;
         }
     }
 }
