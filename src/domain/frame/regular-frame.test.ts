@@ -34,6 +34,17 @@ describe('regular frame', () => {
             expect(frame.pinsAvailable).toBe(5);
         });
 
+        it('should validate valid input', () => {
+            const frame = createFrame();
+            expect(frame.isInputValid(5)).toBeTruthy();
+        });
+
+        it('should validate invalid input', () => {
+            const frame = createFrame();
+            frame.add(5);
+            expect(frame.isInputValid(8)).toBeFalsy();
+        });
+
         it('should be full after two throws (2, 3)', () => {
             const frame = createFrame();
             frame.add(2);

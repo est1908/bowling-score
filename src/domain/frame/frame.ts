@@ -26,16 +26,15 @@ export abstract class Frame {
     }
 
     public add(pins: number): void {
-        if (pins < 0 || pins > MAX_PINS_COUNT) {
-            throw Error('Invalid pin value, must be in range between 0 and 10');
-        }
-        if (this.isComplete) {
-            throw Error('Frame is already full');
-        }
-        if (pins > this.pinsAvailable) {
-            throw Error(`Only ${this.pinsAvailable} pins are available now on the lane`);
+        const errorText = this.validatePins(pins);
+        if (errorText !== null) {
+            throw Error(errorText);
         }
         this._tries.push(pins);
+    }
+
+    public isInputValid(pins: number): boolean {
+        return this.validatePins(pins) === null;
     }
 
     public undo(): void {
@@ -70,5 +69,19 @@ export abstract class Frame {
             return null;
         }
         return sum + nextTriesSum;
+    }
+
+    // Validate input return error or null
+    private validatePins(pins: number): string | null {
+        if (pins < 0 || pins > MAX_PINS_COUNT) {
+            return 'Invalid pin value, must be in range between 0 and 10';
+        }
+        if (this.isComplete) {
+            return 'Frame is already full';
+        }
+        if (pins > this.pinsAvailable) {
+            return `Only ${this.pinsAvailable} pins are available now on the lane`;
+        }
+        return null;
     }
 }

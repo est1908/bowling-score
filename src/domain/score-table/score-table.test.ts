@@ -189,6 +189,17 @@ describe('Score table', () => {
         expect(table.totalScore).toBe(0);
     });
 
+    it('should validate valid input', () => {
+        const table = createTable();
+        expect(table.isInputValid(5)).toBeTruthy();
+    });
+
+    it('should validate invalid input', () => {
+        const table = createTable();
+        table.add(5);
+        expect(table.isInputValid(8)).toBeFalsy();
+    });
+
     function createTable() {
         return new ScoreTableDefault();
     }

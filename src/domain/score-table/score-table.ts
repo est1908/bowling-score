@@ -74,6 +74,10 @@ export class ScoreTableDefault implements ScoreTable {
         }
     }
 
+    isInputValid(pins: number): boolean {
+        return this.currentFrame.isInputValid(pins);
+    }
+
     reset() {
         this._frames.forEach((x) => x.reset());
         this._currentFrameIndex = 0;

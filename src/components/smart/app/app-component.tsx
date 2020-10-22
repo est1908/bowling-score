@@ -45,9 +45,17 @@ export default class App extends Component<Props, State> {
         this.state = mapToState(this.props.scoreTable);
     }
 
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyDown);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyDown);
+    }
+
     render() {
         return (
-            <div className="app-container" onKeyDown={this.handleKeyDown}>
+            <div className="app-container">
                 <h1 className="app-container__title">Bowling score calculator</h1>
                 <div className="app-container__score-table">{this.renderScoreTable()}</div>
                 <div className="app-container__action-buttons">{this.renderActionButtons()}</div>
@@ -99,6 +107,7 @@ export default class App extends Component<Props, State> {
         return (
             <button
                 className="app-container__btn-undo"
+                title="Undo last move"
                 disabled={!this.state.isUndoAvailable}
                 onClick={this.handleUndo}
             >
@@ -124,20 +133,13 @@ export default class App extends Component<Props, State> {
     };
 
     handleKeyDown = (e: any) => {
-        // todo: add a11y
-        // if (!e.charCode){
-        //     return;
-        // }
-        // if (!this.state.isGameFinished){
-        //     return;
-        // }
-        // var char = String.fromCharCode(e.charCode);
-        // if (char >= '0' && char <= '9') {
-        //     const pins = parseInt(char);
-        //     if (pins <= this.state.pinsAvailable){
-        //         this.props.scoreTable.add(pins)
-        //     }
-        // }
+        if (e.key >= '0' && e.key <= '9') {
+            const pins = parseInt(e.key, 10);
+            if (this.props.scoreTable.isInputValid(pins)) {
+                this.props.scoreTable.add(pins);
+                this.updateState();
+            }
+        }
     };
 
     private updateState() {

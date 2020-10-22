@@ -8,6 +8,7 @@ export interface ScoreTable {
     isGameFinished: boolean;
     pinsAvailable: number;
     add(pins: number): void;
+    isInputValid(pins: number): boolean;
     undo(): void;
     reset(): void;
 }
