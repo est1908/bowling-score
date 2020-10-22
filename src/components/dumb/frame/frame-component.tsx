@@ -10,7 +10,7 @@ type Props = {
     highlighted: boolean;
 };
 
-export const Frame = (props: Props) => {
+export const Frame = (props: Props): JSX.Element => {
     function renderTry(frameTry: TryDisplaySymbol) {
         switch (frameTry) {
             case TrySpecialSymbol.None:

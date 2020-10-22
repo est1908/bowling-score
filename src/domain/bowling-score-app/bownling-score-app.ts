@@ -62,7 +62,7 @@ export class BowlingScoreApp implements IBowlingScoreApp {
         return this.currentFrame.isInputValid(pins);
     }
 
-    reset() {
+    reset(): void {
         this._frames.forEach((x) => x.reset());
         this._currentFrameIndex = 0;
     }

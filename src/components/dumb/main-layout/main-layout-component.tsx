@@ -5,7 +5,7 @@ type Props = {
     children: ReactNode;
 };
 
-export default function MainLayout(props: Props) {
+export default function MainLayout(props: Props): JSX.Element {
     return (
         <div className="main-layout">
             <div className="main-layout__header" />

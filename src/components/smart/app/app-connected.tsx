@@ -33,13 +33,13 @@ export default class AppConnected extends Component<Props, State> {
         this.state = mapToState(this.props.bowlingScore);
     }
 
-    render() {
+    render(): JSX.Element {
         return (
             <App {...this.state} onNewGame={this.handleNewGame} onUndo={this.handleUndo} onAction={this.handleAction} />
         );
     }
 
-    handleAction = (btnCode: ActionButtonCode) => {
+    handleAction = (btnCode: ActionButtonCode): void => {
         const pins = this.buttonCodeToPins(btnCode);
         if (this.props.bowlingScore.isInputValid(pins)) {
             this.props.bowlingScore.add(pins);
@@ -47,12 +47,12 @@ export default class AppConnected extends Component<Props, State> {
         }
     };
 
-    handleNewGame = () => {
+    handleNewGame = (): void => {
         this.props.bowlingScore.reset();
         this.updateState();
     };
 
-    handleUndo = () => {
+    handleUndo = (): void => {
         this.props.bowlingScore.undo();
         this.updateState();
     };

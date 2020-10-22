@@ -6,11 +6,16 @@
         "strictPropertyInitialization": true,
         "strictBindCallApply": true,
         "strictFunctionTypes": true,
+
+        "esModuleInterop": true, // Disables namespace imports (import * as fs from "fs")
+        "noUnusedLocals": true, // Report errors on unused locals
+
         "baseUrl": "src",
 
         "moduleResolution": "node",
         // Allow importing like `import React from 'react'`
         "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
 
         // Use ES2015 module system
         "module": "es2015",

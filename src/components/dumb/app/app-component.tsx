@@ -17,7 +17,7 @@ type Props = {
     onAction: (action: ActionButtonCode) => void;
 };
 
-export function App(props: Props) {
+export function App(props: Props): JSX.Element {
     useEffect(() => {
         document.addEventListener('keydown', handleKeyDown);
         return function cleanup() {

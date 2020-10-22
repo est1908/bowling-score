@@ -5,7 +5,7 @@ type Props = {
     score: number;
 };
 
-export function TotalScoreFrame(props: Props) {
+export function TotalScoreFrame(props: Props): JSX.Element {
     return (
         <div className="total-score-frame" title="Total Score">
             <div className="total-score-frame__score">{props.score}</div>

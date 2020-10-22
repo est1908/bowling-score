@@ -10,7 +10,7 @@ type Props = {
     onClick: (pins: ActionButtonCode) => void;
 };
 
-export default function ActionButtons(props: Props) {
+export default function ActionButtons(props: Props): JSX.Element {
     function isBtnEnabled(x: number | string): boolean {
         if (x === '/') {
             return props.spareEnabled;

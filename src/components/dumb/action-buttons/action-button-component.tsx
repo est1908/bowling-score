@@ -8,8 +8,8 @@ type Props = {
     onClick: (code: ActionButtonCode) => void;
 };
 
-export default function ActionButton(props: Props) {
-    function handleClick() {
+export default function ActionButton(props: Props): JSX.Element {
+    function handleClick(): void {
         props.onClick(props.code);
     }
 
