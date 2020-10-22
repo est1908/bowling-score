@@ -74,7 +74,7 @@ export default class App extends Component<Props, State> {
     renderActionButtons() {
         return (
             <>
-                <div className="app-container__status-text">{this.state.statusText}</div>
+                <div className="app-container__status-text">🎳&nbsp;{this.state.statusText}</div>
                 {!this.state.isGameFinished && (
                     <ActionButtons
                         maxNumber={this.state.pinsAvailable}
