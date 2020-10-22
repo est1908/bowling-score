@@ -49,4 +49,4 @@ export const Frame = (props: Props): JSX.Element => {
 };
 
 // Memorize it due to not often changes
-export const FrameMemorized = React.memo(Frame);
+export default React.memo(Frame);

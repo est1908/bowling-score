@@ -11,7 +11,7 @@
         "noUnusedLocals": true, // Report errors on unused locals
 
         "baseUrl": "src",
-
+     
         "moduleResolution": "node",
         // Allow importing like `import React from 'react'`
         "allowSyntheticDefaultImports": true,

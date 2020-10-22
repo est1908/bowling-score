@@ -29,6 +29,11 @@ module.exports = {
     },
     // File extensions to support resolving
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        alias: {
+            components: path.resolve(__dirname, 'src/components/'),
+            domain: path.resolve(__dirname, 'src/domain/'),
+            styles: path.resolve(__dirname, 'src/styles/')
+        },
+        extensions: ['.ts', '.tsx', '.js', '.scss']
     }
 };
