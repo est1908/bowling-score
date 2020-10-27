@@ -25,13 +25,17 @@ export function App(props: Props): JSX.Element {
         };
     });
 
-    function getStatusText(): string {
-        if (!props.isGameFinished) {
-            return 'Your current attempt result:';
-        } else {
-            return `Game is finished. You score is ${props.totalScore}!`;
-        }
-    }
+    return (
+        <div className="app-container">
+            <h1 className="app-container__title">Bowling score calculator</h1>
+            <div className="app-container__score-table">{renderScoreTable()}</div>
+            <div className="app-container__action-buttons">{renderActionButtons()}</div>
+            <div className="app-container__bottom_buttons">
+                {renderNewButton()}
+                {renderUndoButton()}
+            </div>
+        </div>
+    );
 
     function renderScoreTable() {
         return (
@@ -82,6 +86,14 @@ export function App(props: Props): JSX.Element {
         );
     }
 
+    function getStatusText(): string {
+        if (!props.isGameFinished) {
+            return 'Your current attempt result:';
+        } else {
+            return `Game is finished. You score is ${props.totalScore}!`;
+        }
+    }
+
     function handleKeyDown(e: KeyboardEvent) {
         // pin numbers
         if (e.key >= '0' && e.key <= '9') {
@@ -94,16 +106,4 @@ export function App(props: Props): JSX.Element {
             props.onUndo();
         }
     }
-
-    return (
-        <div className="app-container">
-            <h1 className="app-container__title">Bowling score calculator</h1>
-            <div className="app-container__score-table">{renderScoreTable()}</div>
-            <div className="app-container__action-buttons">{renderActionButtons()}</div>
-            <div className="app-container__bottom_buttons">
-                {renderNewButton()}
-                {renderUndoButton()}
-            </div>
-        </div>
-    );
 }

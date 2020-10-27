@@ -11,6 +11,15 @@ type Props = {
 };
 
 export default function ActionButtons(props: Props): JSX.Element {
+    const itemCodes: ActionButtonCode[] = [...Array.from(Array(10).keys()), '/', 'x'];
+    return (
+        <div className="action-buttons">
+            {itemCodes.map((x) => (
+                <ActionButton key={`btn-${x}`} code={x} enabled={isBtnEnabled(x)} onClick={props.onClick} />
+            ))}
+        </div>
+    );
+
     function isBtnEnabled(x: number | string): boolean {
         if (x === '/') {
             return props.spareEnabled;
@@ -20,13 +29,4 @@ export default function ActionButtons(props: Props): JSX.Element {
         }
         return x <= props.maxNumber;
     }
-
-    const itemCodes: ActionButtonCode[] = [...Array.from(Array(10).keys()), '/', 'x'];
-    return (
-        <div className="action-buttons">
-            {itemCodes.map((x) => (
-                <ActionButton key={`btn-${x}`} code={x} enabled={isBtnEnabled(x)} onClick={props.onClick} />
-            ))}
-        </div>
-    );
 }
