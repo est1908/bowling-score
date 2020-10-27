@@ -5,12 +5,16 @@ import { BowlingScoreApp } from './domain';
 import { render } from 'react-dom';
 import './styles/style.scss';
 import 'reset-css';
+import { AppContext } from './app-context';
 
 const bowlingScoreApp = new BowlingScoreApp();
 
+
 const element = (
-    <MainLayout>
-        <App bowlingScore={bowlingScoreApp} />
-    </MainLayout>
+    <AppContext.Provider value={bowlingScoreApp}>
+        <MainLayout>
+            <App/>
+        </MainLayout>
+    </AppContext.Provider>
 );
 render(element, document.getElementById('root'));

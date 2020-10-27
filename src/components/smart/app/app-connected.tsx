@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ActionButtonCode } from 'components/dumb/action-buttons/action-button-codes';
 import { App } from 'components/dumb/app/app-component';
 import { IBowlingScoreApp, IFrameScore } from '../../../domain';
+import { AppContext } from '../../../app-context';
 
-type Props = {
-    bowlingScore: IBowlingScoreApp;
-};
+type Props = {};
 
 type AppState = {
     frameScores: IFrameScore[];
@@ -17,30 +16,31 @@ type AppState = {
 };
 
 export default function AppConnected(props: Props) {
-    const [appState, setAppState] = useState(mapToAppState(props.bowlingScore));
+    const bowlingScoreApp: IBowlingScoreApp = useContext(AppContext)!;
+    const [appState, setAppState] = useState(mapToAppState(bowlingScoreApp));
 
     return <App {...appState} onNewGame={handleNewGame} onUndo={handleUndo} onAction={handleAction} />;
 
     function handleAction(btnCode: ActionButtonCode) {
         const pins = buttonCodeToPins(btnCode);
-        if (props.bowlingScore.isInputValid(pins)) {
-            props.bowlingScore.add(pins);
+        if (bowlingScoreApp.isInputValid(pins)) {
+            bowlingScoreApp.add(pins);
             updateState();
         }
     }
 
     function handleNewGame() {
-        props.bowlingScore.reset();
+        bowlingScoreApp.reset();
         updateState();
     }
 
     function handleUndo() {
-        props.bowlingScore.undo();
+        bowlingScoreApp.undo();
         updateState();
     }
 
     function updateState() {
-        setAppState(mapToAppState(props.bowlingScore));
+        setAppState(mapToAppState(bowlingScoreApp));
     }
 
     function buttonCodeToPins(btnCode: ActionButtonCode): number {
